@@ -13,8 +13,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-10 pb-12 border-b border-white/10">
           {/* Brand Column (Span 2) */}
           <div className="lg:col-span-2 space-y-4">
-            <div
-              onClick={() => onNavigate('/')}
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('/');
+              }}
               className="flex items-center gap-2.5 cursor-pointer select-none"
             >
               <div className="w-10 h-10 rounded-xl bg-[#367B53] text-[#C6E75A] p-2 flex items-center justify-center shadow-xs">
@@ -37,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   Upcycle & Grow
                 </span>
               </div>
-            </div>
+            </a>
 
             <p className="text-xs text-[#E8F0E5]/80 leading-relaxed max-w-sm">
               Turn everyday waste into something beautiful. Practical guides, tools and ideas for a greener home and healthier planet.
@@ -91,24 +95,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-[#E8F0E5]/80">
               <li>
-                <button onClick={() => onNavigate('/waste-to-garden')} className="hover:text-[#C6E75A] transition">
+                <a href="/waste-to-garden" onClick={(e) => { e.preventDefault(); onNavigate('/waste-to-garden'); }} className="hover:text-[#C6E75A] transition">
                   Waste to Garden
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/composting')} className="hover:text-[#C6E75A] transition">
+                <a href="/composting" onClick={(e) => { e.preventDefault(); onNavigate('/composting'); }} className="hover:text-[#C6E75A] transition">
                   Composting
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/diy-garden-projects')} className="hover:text-[#C6E75A] transition">
+                <a href="/diy-garden-projects" onClick={(e) => { e.preventDefault(); onNavigate('/diy-garden-projects'); }} className="hover:text-[#C6E75A] transition">
                   DIY Projects
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/gardening-guides')} className="hover:text-[#C6E75A] transition">
+                <a href="/gardening-guides" onClick={(e) => { e.preventDefault(); onNavigate('/gardening-guides'); }} className="hover:text-[#C6E75A] transition">
                   Gardening Guides
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -120,24 +124,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-[#E8F0E5]/80">
               <li>
-                <button onClick={() => onNavigate('/tools/compost-calculator')} className="hover:text-[#C6E75A] transition">
+                <a href="/tools/compost-calculator" onClick={(e) => { e.preventDefault(); onNavigate('/tools/compost-calculator'); }} className="hover:text-[#C6E75A] transition">
                   Compost Calculator
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/tools/brown-green-calculator')} className="hover:text-[#C6E75A] transition">
+                <a href="/tools/brown-green-calculator" onClick={(e) => { e.preventDefault(); onNavigate('/tools/brown-green-calculator'); }} className="hover:text-[#C6E75A] transition">
                   Brown-to-Green Calculator
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/tools/soil-amendment-calculator')} className="hover:text-[#C6E75A] transition">
+                <a href="/tools/soil-amendment-calculator" onClick={(e) => { e.preventDefault(); onNavigate('/tools/soil-amendment-calculator'); }} className="hover:text-[#C6E75A] transition">
                   Soil Amendment Calculator
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/tools/potting-mix-calculator')} className="hover:text-[#C6E75A] transition">
+                <a href="/tools/potting-mix-calculator" onClick={(e) => { e.preventDefault(); onNavigate('/tools/potting-mix-calculator'); }} className="hover:text-[#C6E75A] transition">
                   Potting Mix Calculator
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -149,24 +153,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-[#E8F0E5]/80">
               <li>
-                <button onClick={() => onNavigate('/about')} className="hover:text-[#C6E75A] transition">
+                <a href="/about" onClick={(e) => { e.preventDefault(); onNavigate('/about'); }} className="hover:text-[#C6E75A] transition">
                   About Us
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/contact')} className="hover:text-[#C6E75A] transition">
+                <a href="/contact" onClick={(e) => { e.preventDefault(); onNavigate('/contact'); }} className="hover:text-[#C6E75A] transition">
                   Contact
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/editorial-policy')} className="hover:text-[#C6E75A] transition">
+                <a href="/editorial-policy" onClick={(e) => { e.preventDefault(); onNavigate('/editorial-policy'); }} className="hover:text-[#C6E75A] transition">
                   Editorial Policy
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/advertising-policy')} className="hover:text-[#C6E75A] transition">
+                <a href="/advertising-policy" onClick={(e) => { e.preventDefault(); onNavigate('/advertising-policy'); }} className="hover:text-[#C6E75A] transition">
                   Advertising Policy
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -178,24 +182,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h4>
             <ul className="space-y-2 text-xs text-[#E8F0E5]/80">
               <li>
-                <button onClick={() => onNavigate('/privacy-policy')} className="hover:text-[#C6E75A] transition">
+                <a href="/privacy-policy" onClick={(e) => { e.preventDefault(); onNavigate('/privacy-policy'); }} className="hover:text-[#C6E75A] transition">
                   Privacy Policy
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/terms-and-conditions')} className="hover:text-[#C6E75A] transition">
+                <a href="/terms-and-conditions" onClick={(e) => { e.preventDefault(); onNavigate('/terms-and-conditions'); }} className="hover:text-[#C6E75A] transition">
                   Terms & Conditions
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/disclaimer')} className="hover:text-[#C6E75A] transition">
+                <a href="/disclaimer" onClick={(e) => { e.preventDefault(); onNavigate('/disclaimer'); }} className="hover:text-[#C6E75A] transition">
                   Disclaimer
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => onNavigate('/cookie-policy')} className="hover:text-[#C6E75A] transition">
+                <a href="/cookie-policy" onClick={(e) => { e.preventDefault(); onNavigate('/cookie-policy'); }} className="hover:text-[#C6E75A] transition">
                   Cookie Policy
-                </button>
+                </a>
               </li>
             </ul>
           </div>

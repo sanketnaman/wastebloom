@@ -1,4 +1,4 @@
-import { DIYProjectItem } from '../types';
+import type { DIYProjectItem } from '../types';
 
 export const diyProjects: DIYProjectItem[] = [
   {

@@ -33,9 +33,9 @@ export const GardeningGuidesPage: React.FC<GardeningGuidesPageProps> = ({ onNavi
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {gardeningGuides.map((guide) => (
-          <div
+          <a
             key={guide.id}
-            onClick={() => onNavigate(`/gardening-guides/${guide.slug}`)}
+            href={`/gardening-guides/${guide.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/gardening-guides/${guide.slug}`); }}
             className="bg-white rounded-3xl overflow-hidden border border-[#E3EDE1] hover:border-[#387A53] transition cursor-pointer shadow-xs hover:shadow-md flex flex-col group"
           >
             <div className="relative h-52 overflow-hidden">
@@ -67,7 +67,7 @@ export const GardeningGuidesPage: React.FC<GardeningGuidesPageProps> = ({ onNavi
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>

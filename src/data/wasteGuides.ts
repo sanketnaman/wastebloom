@@ -1,4 +1,4 @@
-import { WasteGuideItem } from '../types';
+import type { WasteGuideItem } from '../types';
 
 export const wasteGuides: WasteGuideItem[] = [
   {
@@ -94,181 +94,417 @@ export const wasteGuides: WasteGuideItem[] = [
   {
     id: 'eggshells',
     slug: 'eggshells-for-plants',
-    title: 'Eggshells for Plants: Calcium Carbonate, Vinegar Myth vs Powdering, and Soil Health',
+    title: `Eggshells for Plants: How to Use Them (and What's a Myth)`,
     shortTitle: 'Eggshells for Plants',
     scientificName: 'Calcium Carbonate (CaCO3)',
-    excerpt: 'Eggshells are 95% calcium carbonate, but coarse cracked pieces take years to decompose. Discover how fine pulverization or vinegar extraction actually unlocks calcium for plants.',
-    readingTime: '7 min read',
+    excerpt: `How to use eggshells for plants: prepare crushed eggshells, add them to compost and soil, and learn what research says about tomatoes and slugs.`,
+    readingTime: '9 min read',
     category: 'Kitchen Scraps',
     suitability: 'Suitable with preparation',
-    cToNRatio: 'Mineral (Negligible C:N, high Calcium)',
+    cToNRatio: 'Mineral (negligible C:N — about 95% calcium carbonate)',
     type: 'Mineral / Neutral',
     featuredImage: 'https://images.unsplash.com/photo-1569288052389-dac9b01c9c05?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Crushed clean eggshells in a bowl with garden soil',
-    quickAnswer: 'Eggshells provide abundant calcium and trace minerals that strengthen plant cell walls and neutralize acidic soil. However, coarsely crushed shells take 2 to 5 years to break down in soil. To make calcium bioavailable within the current growing season, eggshells must be baked dry and pulverized into an ultra-fine powder, or reacted with vinegar to produce water-soluble calcium acetate.',
+    metaTitle: `Eggshells for Plants: How to Use Them and What's a Myth`,
+    metaDescription: `How to use eggshells for plants: prepare crushed eggshells, add them to compost and soil, and learn what research says about tomatoes and slugs.`,
+    publishedAt: '2026-10-03',
+    updatedAt: '2026-10-03',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      `Every week most households throw away a small pile of eggshells. They are made mostly of calcium, so it is no surprise that gardeners want to put them to work. The catch is that a lot of popular eggshell advice, especially for tomatoes and slugs, does not hold up when it is tested.`,
+      `This guide shows how to use eggshells for plants in ways that genuinely help, how to prepare them properly, and which popular claims to skip.`,
+    ],
+    featuredImageCaption: 'Finely ground shell powder is the form that actually breaks down in soil.',
+    quickAnswer: `Yes — mainly as a compost ingredient or a slow-release calcium source when ground into a fine powder. They are not a fertilizer: they contain almost no nitrogen, phosphorus or potassium. Dry them, grind them to a fine powder, and add them to compost or soil. They do not stop blossom end rot (watering consistency matters far more) and they do not reliably repel slugs (a controlled trial found no benefit).`,
     directSoilUsage: {
       allowed: true,
-      explanation: 'Fine eggshell powder can be mixed directly into potting mix or garden beds. Coarse chunks will not release calcium fast enough to help current plants, but will physically improve aeration.'
+      explanation: `Fine powder, in small amounts: sprinkle it into planting holes or mix it into the top layer of soil. A commonly cited rule of thumb is the powder from about four or five shells per plant or pot — treat that as an upper limit, not a target, because no research-backed dose exists for home gardens and too much calcium can interfere with how plants absorb other nutrients. Coarse crushed shells mainly work as a compost texture ingredient, not as a calcium supply; whole or coarsely crushed pieces can last for years in soil. Because eggshells can raise pH, go lightly in containers and with acid-loving plants.`
     },
     compostSuitability: {
       recommended: true,
       speed: 'Slow (3-6+ months)',
-      details: 'Eggshells buffer compost acidity and add grit that benefits earthworms and beneficial microbes. Fine grinding before adding ensures rapid breakdown.'
+      details: `Add crushed or powdered shells to your compost pile or worm bin: they contribute calcium and diverse texture, and worms and microbes break them down when the pieces are small. Fine grinding before adding helps them disappear — whole or coarsely crushed pieces can last for years and often still show up as white bits in finished compost.`
     },
     preparationSteps: [
-      'Rinse shells thoroughly with warm water to remove leftover egg whites that can attract pests.',
-      'Bake at 200°F (95°C) for 15-20 minutes to sterilize any potential Salmonella bacteria and make the shells brittle.',
-      'Crush in a coffee grinder, blender, or mortar and pestle until it forms a powdery flour consistency.',
-      'Optional bioavailable fast-track: Combine 1 tbsp shell powder with 1 cup of apple cider vinegar. Wait until bubbling stops (forms soluble calcium acetate).'
+      `Rinse lightly: rinse out leftover egg white. You do not need to scrub, but rinsing reduces odor and pests when you store shells.`,
+      `Dry them: let shells air-dry for several days, or warm them in a low oven (a typical approach is around 250°F / 120°C for 20 to 30 minutes) until they feel brittle. Michigan State University Extension suggests drying or briefly warming shells so they crush more fully.`,
+      `Grind them to a fine powder: use a spare blender or coffee grinder and grind until the shells look like flour. University of Illinois Extension highlights this step as the "trick" that makes eggshells effective — do not skip it if you want a real calcium effect.`,
+      `Store them: keep powder in a labeled jar so nobody mistakes it for baking supplies.`,
     ],
     howToUseSteps: [
       {
-        title: 'Step 1: Planting Hole Pre-Treatment',
-        description: 'Add 2 tablespoons of fine eggshell powder into the planting hole when transplanting tomatoes, peppers, or squashes, mixing it into the root zone soil.'
+        title: 'In Compost (Best Use)',
+        description: `Add crushed or powdered shells to your compost pile or worm bin. They contribute calcium and, once broken down, will not be the white bits you pick out of the finished product. For more on balancing a pile, see our [composting for beginners guide](/composting/composting-for-beginners).`
       },
       {
-        title: 'Step 2: Top Dressing for Garden Beds',
-        description: 'Scatter 1 cup of shell powder per 10 square feet of garden soil in the spring or autumn to steadily buffer soil acidity over time.'
+        title: 'In Garden Soil',
+        description: `Sprinkle a small amount of fine powder into planting holes or mix it into the top layer of soil. A commonly cited rule of thumb is the powder from about four or five shells per plant or pot — treat that as an upper limit, not a target. No research-backed dose exists for home gardens, and too much calcium can interfere with how plants absorb other nutrients.`
       },
       {
-        title: 'Step 3: Worm Bin Grit Booster',
-        description: 'Worms need calcium carbonate to regulate their digestive calciferous glands and grit to grind food in their gizzards. Sprinkle 1 teaspoon of powder weekly.'
-      }
+        title: 'As Crushed Eggshells (Coarse)',
+        description: `Coarse crushed shells mainly work as a compost texture ingredient, not as a calcium supply. If you only crush them lightly, expect them to stick around.`
+      },
+      {
+        title: 'For Houseplants and Containers',
+        description: `You can stir a small pinch of fine powder into potting mix. Because eggshells can raise pH in pots, avoid using them with acid-loving plants such as azaleas, gardenias or blueberries.`
+      },
+      {
+        title: 'As Seed Starters',
+        description: `Half an eggshell filled with seed-starting mix makes a cute mini pot. When transplanting, gently crack the shell so roots can spread, because the shell itself will not decompose quickly. A paper egg carton is an easy tray for holding them, as in our [egg carton seed starter guide](/diy-garden-projects/egg-carton-seed-starter).`
+      },
     ],
     benefits: [
-      'Supplies over 95% calcium carbonate, essential for building sturdy plant cell walls.',
-      'Provides trace levels of phosphorus, magnesium, and bioavailable protein membranes.',
-      'Acts as a mild, slow-release liming agent that naturally raises soil pH in overly acidic soils.'
+      `Calcium over time: finely ground shell powder releases calcium much faster than chunks. Soil tests tell you whether your soil needs more, and many soils already have plenty.`,
+      `A gentle liming effect: because they are calcium carbonate, shells can nudge acidic soil toward neutral. University of Illinois Extension notes eggshells have raised pH in greenhouse studies of potted plants, so they are best used cautiously in containers.`,
+      `A useful compost ingredient: shells add minerals and diverse texture to compost, and worms and microbes break them down when they are small.`,
+      `Less waste: reusing shells keeps them out of the trash.`,
     ],
     limitations: [
-      'Insoluble in pure water; requires acidic soil or microbial digestion to release calcium ions.',
-      'Not suitable as a heavy amendment for acid-loving plants like blueberries, azaleas, or rhododendrons.',
-      'Large eggshell halves can harbor Salmonella if not sanitized or properly hot-composted.'
+      `They break down slowly: whole or coarsely crushed pieces can last for years in soil, and they often still show up as white bits in finished compost.`,
+      `Not a balanced fertilizer: shells do not give plants nitrogen, so they will not replace compost, manure or a proper fertilizer.`,
+      `Coarse pieces give little benefit: a study from Alabama Cooperative Extension, reported by University of Illinois Extension, found coarse pieces did little while finely ground shells performed like lime.`,
+      `Eggshell "tea" is weak evidence: calcium carbonate dissolves poorly in plain water, so expect little from boiled eggshell water.`,
+      `They can raise soil pH: University of Illinois Extension notes eggshells raised pH in greenhouse studies of potted plants, so use them cautiously in containers and avoid over-applying around acid-loving plants.`,
     ],
     mythsBusted: [
       {
-        myth: 'Throwing coarse crushed eggshells around plants stops slugs and snails in their tracks.',
-        reality: 'Scientific controlled trials repeatedly demonstrate that snails and slugs secrete thick mucus and crawl directly over sharp eggshell fragments without injury.'
+        myth: `Eggshells prevent blossom end rot on tomatoes.`,
+        reality: `Myth. Extensions in Minnesota, North Carolina, Mississippi and Illinois agree the usual trigger is uneven watering that disrupts calcium transport in the plant, and whole or crushed shells break down far too slowly to help in the current season.`
       },
       {
-        myth: 'Throwing whole eggshells on the compost pile provides instant fertilizer.',
-        reality: 'Eggshell fragments routinely survive multiple compost cycles intact unless pre-ground into flour.'
-      }
+        myth: `Eggshells repel slugs and snails.`,
+        reality: `Not supported. The Royal Horticultural Society tested crushed eggshells in a six-week lettuce trial and found no difference in slug damage compared with unprotected plants.`
+      },
+      {
+        myth: `Any crushed eggshell works as a calcium source.`,
+        reality: `Overstated. Coarse pieces gave little benefit in an Alabama study, while fine powder worked much better — grinding to a flour-like powder is the step that makes the difference.`
+      },
+      {
+        myth: `Boiled eggshell "tea" is a great calcium fertilizer.`,
+        reality: `Weak evidence. Calcium carbonate dissolves poorly in plain water, so expect little.`
+      },
+      {
+        myth: `Eggshells are free fertilizer.`,
+        reality: `Overstated. They supply calcium, not the main nutrients plants need — they contain almost no nitrogen, phosphorus or potassium.`
+      },
     ],
     commonMistakes: [
-      'Adding unwashed, raw eggshells directly to compost bins where rats or raccoons are present.',
-      'Expecting unground eggshells to instantly cure blossom end rot within days.',
-      'Applying eggshell powder to alkaline soils (pH above 7.2) where additional calcium carbonate is unneeded.'
+      `Burying whole eggshells and expecting a fast calcium boost.`,
+      `Relying on eggshells to fix or prevent blossom end rot.`,
+      `Using shells as a slug barrier without a backup plan.`,
+      `Over-applying around acid-loving plants.`,
+      `Skipping the soil test and guessing that your soil needs calcium.`,
+      `Leaving wet shells in a sealed container where they smell.`,
     ],
     safetyPrecautions: [
-      'Always bake or boil shells to eliminate Salmonella risks, especially when growing root vegetables or salad greens eaten raw.',
-      'Wear a dust mask when grinding large quantities of shell powder to avoid inhaling fine calcium dust.'
+      `Salmonella note: raw eggshells can carry bacteria on the surface. Michigan State University Extension says hot composting at about 140 to 160°F kills salmonella and that shells make up a tiny fraction of any pile. Wash your hands after handling raw shells and wash edible plants before eating them.`,
+      `Eggshells can raise pH: go lightly in pots and avoid over-applying around acid-loving plants such as azaleas, gardenias or blueberries.`,
+      `Too much calcium can interfere with how plants absorb other nutrients — take a soil test before adding any calcium source.`,
+      `Soil conditions vary, so confirm with a soil test or your local extension office before making large changes.`,
     ],
     faqs: [
       {
-        question: 'Can eggshells prevent blossom end rot in tomatoes?',
-        answer: 'Blossom end rot is a calcium deficiency in the fruit, but it is usually caused by erratic watering rather than a lack of soil calcium. Applying soluble calcium acetate or powdered shells early in the season helps prevent it if watering is consistent.'
+        question: `Are eggshells good for plants?`,
+        answer: `Yes, mainly as a compost ingredient or a slow-release calcium source when ground into a fine powder. They are not a fast fertilizer and do not supply nitrogen, phosphorus or potassium.`
       },
       {
-        question: 'Do brown eggs work better than white eggs?',
-        answer: 'No. The chemical composition (calcium carbonate, protein matrix, and trace minerals) is virtually identical regardless of shell color.'
-      }
+        question: `Do eggshells prevent blossom end rot on tomatoes?`,
+        answer: `No. Several university extensions report that blossom end rot is usually caused by uneven watering that disrupts calcium transport in the plant, and whole or crushed shells break down far too slowly to fix it.`
+      },
+      {
+        question: `Should I crush eggshells or grind them to powder?`,
+        answer: `Powder works much better. A study from Alabama Cooperative Extension, reported by University of Illinois Extension, found coarse pieces did little while finely ground shells performed like lime.`
+      },
+      {
+        question: `Do I need to wash or bake eggshells first?`,
+        answer: `Rinsing and drying them makes them easier to store and grind. Extension sources say salmonella is not a practical concern for compost, and hot composting kills it, but wash your hands after handling raw shells.`
+      },
+      {
+        question: `Do eggshells repel slugs and snails?`,
+        answer: `Not reliably. The Royal Horticultural Society tested crushed eggshells in a six-week lettuce trial and found no difference in slug damage compared with unprotected plants.`
+      },
+      {
+        question: `Can I use eggshells on houseplants?`,
+        answer: `You can mix a small amount of fine powder into potting mix, but eggshells can raise pH in pots, so go lightly, especially with acid-loving plants.`
+      },
+      {
+        question: `Can I put eggshells and coffee grounds in the same compost?`,
+        answer: `Yes. They are both fine in compost. Grounds supply nitrogen and shells supply calcium, but neither fixes the other's pH.`
+      },
     ],
     references: [
-      'Iowa State University Extension: "The Myth of Eggshells as Slug Barriers"',
-      'Journal of Horticultural Science: "Bioavailability of eggshell waste calcium in container substrates"',
-      'Cornell Cooperative Extension: "Soil Testing and Calcium Management"'
+      { title: `Using Eggshells in the Garden and Compost (University of Illinois Extension)`, url: 'https://extension.illinois.edu/blogs/good-growing/2018-03-28-using-eggshells-garden-and-compost' },
+      { title: `Coffee Grounds, Eggshells and Epsom Salts in the Home Garden (University of Minnesota Extension)`, url: 'https://extension.umn.edu/manage-soil-nutrients/coffee-grounds-eggshells-epsom-salts' },
+      { title: `Gardening MythBusters: Eggshells for Calcium (NC State Extension)`, url: 'https://chowan.ces.ncsu.edu/news/gardening-mythbusters-eggshells-for-calcium/' },
+      { title: `Can Eggshells Prevent Blossom End Rot? (Mississippi State University Extension)`, url: 'https://extension.msstate.edu/node/57058' },
+      { title: `Adding eggshells to compost (Michigan State University Extension)`, url: 'https://canr.msu.edu/news/adding_eggshells_to_compost' },
+      { title: `How to stop slugs and snails: what works? (Royal Horticultural Society)`, url: 'https://www.rhs.org.uk/science/articles/stop-slugs-and-snails' },
     ],
-    relatedGuideSlugs: ['banana-peels-for-plants', 'coffee-grounds-for-plants', 'vegetable-scraps-for-compost']
+    additionalSections: [
+      {
+        title: 'What Are Eggshells Made of?',
+        blocks: [
+          { type: 'paragraph', text: `Eggshells are mostly **calcium carbonate**, roughly 95 percent by weight. This is the same compound found in agricultural lime, which is why shells can slowly reduce soil acidity and add calcium.` },
+          { type: 'paragraph', text: `Two practical points follow from that:` },
+          {
+            type: 'bullets',
+            items: [
+              `**They break down slowly.** Whole or coarsely crushed pieces can last for years in soil, and they often still show up as white bits in finished compost.`,
+              `**They are not a balanced fertilizer.** Shells do not give plants nitrogen, so they will not replace compost, manure or a proper fertilizer.`,
+            ]
+          },
+        ]
+      },
+      {
+        title: 'Eggshells for Tomato Plants: What to Do Instead',
+        blocks: [
+          { type: 'paragraph', text: `Gardeners often bury eggshells under tomatoes hoping to stop blossom end rot, the black sunken patch on the bottom of fruit. It is a calcium-related disorder, but extension educators point out the usual trigger is **inconsistent watering**, which disrupts how calcium moves inside the plant, rather than a shortage of calcium in the soil. Eggshells also break down far too slowly to fix a problem in the current season.` },
+          { type: 'paragraph', text: `What actually helps:` },
+          {
+            type: 'bullets',
+            items: [
+              `Water deeply and consistently, and mulch to keep moisture even.`,
+              `Take a soil test before adding any calcium source.`,
+              `If the test shows low calcium, use a proven amendment such as lime or gypsum as recommended by your local extension service.`,
+              `Keep adding shells to compost, which is a safe and sensible use.`,
+            ]
+          },
+        ]
+      },
+      {
+        title: 'Coffee Grounds and Eggshells for Plants',
+        blocks: [
+          { type: 'paragraph', text: `People love to pair these two because both are free and common in kitchens. They go well together in a compost pile, where grounds supply nitrogen and shells supply calcium, but there is no special chemistry between them. Used coffee grounds are not reliably acidic, so they will not balance out the alkalinity of shells. Read our full guide to [coffee grounds for plants](/waste-to-garden/coffee-grounds-for-plants) for the details.` },
+          { type: 'paragraph', text: `A simple routine many home composters follow:` },
+          {
+            type: 'numbered',
+            items: [
+              `Keep a lidded kitchen pail for scraps.`,
+              `Add grounds and paper filters freely, and keep dried, ground shells in a separate jar.`,
+              `Layer both with dry leaves or shredded cardboard.`,
+              `Turn the pile now and then and keep it as moist as a wrung-out sponge.`,
+            ]
+          },
+        ]
+      },
+    ],
+    bottomLine: `Eggshells are worth saving, but treat them as a compost ingredient and a slow calcium source, not a cure-all. Dry them, grind them fine, add them to compost, and rely on steady watering and a soil test for tomatoes. Next: read our guide to [coffee grounds for plants](/waste-to-garden/coffee-grounds-for-plants) or [how to make compost at home](/composting/how-to-make-compost-at-home).`,
+    relatedGuideSlugs: ['coffee-grounds-for-plants', 'how-to-make-compost-at-home', 'egg-carton-seed-starter']
   },
   {
     id: 'coffee-grounds',
     slug: 'coffee-grounds-for-plants',
-    title: 'Used Coffee Grounds for Plants: Soil pH Myth, Nitrogen Levels, and Composting',
+    title: 'Coffee Grounds for Plants: What the Research Actually Says',
     shortTitle: 'Coffee Grounds for Plants',
     scientificName: 'Coffea arabica residue',
-    excerpt: 'Are coffee grounds really acidic? Despite their dark color, spent coffee grounds are classified as "Green" compost materials with a remarkable 20:1 C:N ratio. Learn how to use them safely.',
-    readingTime: '7 min read',
+    excerpt: `Used coffee grounds for plants: what research says about pH, nitrogen, mulch and compost, plus safe ways to use them and mistakes to avoid.`,
+    readingTime: '9 min read',
     category: 'Kitchen Scraps',
     suitability: 'Suitable with preparation',
-    cToNRatio: '20:1 (High Nitrogen "Green")',
+    cToNRatio: '20:1 to 24:1 (Nitrogen-rich "Green")',
     type: 'Green (Nitrogen)',
     featuredImage: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Rich dark used coffee grounds in a compost bowl surrounded by fresh green leaves',
-    quickAnswer: 'Spent coffee grounds are fantastic for gardening, but they do NOT make your soil highly acidic. During brewing, most water-soluble acids are extracted into your cup, leaving the spent grounds near neutral (pH 6.5 to 6.8). They are rich in nitrogen (~2%) and act as a powerful compost booster. Avoid applying thick layers directly to soil, as coffee grounds dry into a water-repellent crust.',
+    metaTitle: `Coffee Grounds for Plants: What Works and What Doesn't`,
+    metaDescription: `Used coffee grounds for plants: what research says about pH, nitrogen, mulch and compost, plus safe ways to use them and mistakes to avoid.`,
+    publishedAt: '2026-10-03',
+    updatedAt: '2026-10-03',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      `You finish your morning coffee, look at the wet grounds in the filter, and wonder whether they belong in the garden. They do, but not in the way most social media posts describe.`,
+      `Used coffee grounds are a useful **compost ingredient** and, in thin layers, a decent soil conditioner. They are not a miracle fertilizer, they will not reliably acidify your soil, and piling them thickly around plants can cause problems. This guide separates what university research supports from what is repeated online, then shows you exactly how to use coffee grounds for plants without hurting them.`,
+    ],
+    featuredImageCaption: 'Used grounds do their best work after a trip through the compost bin.',
+    quickAnswer: `Yes in moderation, mostly via compost or a thin mulch layer. They are not a fertilizer: used grounds hold roughly 1 to 2 percent nitrogen and release it slowly. They do not make soil acidic in any dependable way — used grounds are close to neutral on average. The best route is composting them or spreading a thin layer under a coarser mulch, and the biggest mistake is dumping a thick layer of fresh grounds on the soil surface.`,
     directSoilUsage: {
       allowed: true,
-      explanation: 'Safe to use in light amounts (a dusting under 1/2 inch) mixed with regular mulch or compost. Never apply a thick unbroken blanket, which compacts into an impenetrable barrier that repels water.'
+      explanation: `Only in thin layers. Spread **no more than about half an inch (1 cm)** and cover it with a thicker layer (around 4 inches / 10 cm) of coarser mulch such as wood chips or shredded leaves — the approach suggested in WSU Extension guidance. Mix grounds in rather than leaving a thick layer so they do not mat together, and do not pile grounds against plant stems. Grounds are very fine, so thick applications can pack together and slow the movement of water and air into the soil.`
     },
     compostSuitability: {
       recommended: true,
       speed: 'Fast (2-4 weeks)',
-      details: 'Coffee grounds are a dream ingredient for compost. They heat up piles quickly and encourage beneficial fungi and earthworms. Keep coffee grounds to under 20-25% of total compost pile volume.'
+      details: `Treat coffee grounds as a nitrogen-rich green material. Keep grounds to about **10 to 20 percent** of the pile by volume (staying under 25 percent is the safe side) and balance them with dry browns: fallen leaves, shredded cardboard, straw or paper. Paper coffee filters can go in too and count as a brown material. Mix grounds in rather than leaving a thick layer, so they do not mat together. In informal Oregon State trials, a pile with grounds making up about a quarter of the material by volume reached hot composting temperatures.`
     },
     preparationSteps: [
-      'Allow grounds to cool and dry slightly after brewing to prevent immediate anaerobic mold growth.',
-      'Compost paper coffee filters right along with the grounds (unbleached brown filters are ideal).',
-      'Never use grounds containing artificial syrups, sweeteners, or dairy residue.'
+      `Use used (brewed) grounds, not fresh ones — fresh, unbrewed grounds still hold more caffeine and acidic compounds and are not recommended for direct use on plants.`,
+      `Break up wet grounds and mix them in rather than leaving them as a thick layer, so they do not mat together.`,
+      `Compost paper coffee filters along with the grounds — they count as a brown material.`,
+      `If you add a lot of uncomposted grounds to soil, pair them with a nitrogen source such as composted manure or grass clippings (as Oregon State recommends), because soil microbes draw down nitrogen while breaking the grounds down.`,
+      `Start small and watch your plants for a couple of weeks. There is no research-backed "per plant" dose for home gardens, and composting the grounds first is the lower-risk route.`,
     ],
     howToUseSteps: [
       {
-        title: 'Step 1: The Golden 20% Compost Ratio',
-        description: 'Add coffee grounds to your compost pile layered between browns (dry leaves, straw, woodchips). Limit grounds to a maximum of 20% of your total pile volume.'
+        title: 'Step 1: Add Them to Your Compost (Best Method)',
+        description: `Treat coffee grounds as a nitrogen-rich green material. Keep grounds to about 10 to 20 percent of the pile by volume, balance them with dry browns (fallen leaves, shredded cardboard, straw or paper), and mix them in rather than leaving a thick layer so they do not mat together. Paper filters count as a brown. Our guide to [green vs brown composting materials](/composting/green-vs-brown-materials) shows how to balance a pile.`
       },
       {
-        title: 'Step 2: Mulch Blending',
-        description: 'Blend coffee grounds with coarse wood mulch or shredded bark at a 1:4 ratio before spreading around trees, shrubs, or perennial beds.'
+        title: 'Step 2: Use a Thin Mulch Layer',
+        description: `If you want to use grounds directly on the soil surface, spread no more than about half an inch (1 cm), then cover it with a thicker layer (around 4 inches / 10 cm) of coarser mulch such as wood chips or shredded leaves. This is the approach suggested in WSU Extension guidance. Do not pile grounds against plant stems.`
       },
       {
-        title: 'Step 3: Worm Farm Treat',
-        description: 'Add 1-2 cups of grounds per week to vermicomposting bins. Worms love the grittiness and microbial activity on aged grounds.'
-      }
+        title: 'Step 3: Mix a Small Amount into Soil',
+        description: `Work a small amount into a garden bed before planting: spread it thinly and mix it well rather than digging in clumps. If you add a lot of uncomposted grounds, pair them with a nitrogen source such as composted manure or grass clippings, as Oregon State recommends. There is no research-backed per-plant dose, so start small, watch your plants for a couple of weeks, and prefer compost over raw grounds.`
+      },
+      {
+        title: 'Step 4: Feed a Worm Bin',
+        description: `Worms handle coffee grounds well in moderation. Mix them with bedding and other scraps instead of tipping in large amounts at once.`
+      },
+      {
+        title: 'Step 5: Houseplants — Be Careful',
+        description: `Grounds sprinkled on top of potting soil tend to stay wet, grow mold and form a crust. If you want to use them indoors, compost them first and mix a small amount of finished compost into the potting mix.`
+      },
     ],
     benefits: [
-      'Supplies steady slow-release organic nitrogen (around 2% by dry weight).',
-      'Attracts earthworms and stimulates beneficial mycorrhizal fungal colonization in soil.',
-      'Acts as an effective moisture regulator when thoroughly blended into compost.'
+      `A good compost ingredient: the nitrogen helps compost microbes work. In informal Oregon State trials, a pile with grounds making up about a quarter of the material by volume reached hot composting temperatures.`,
+      `Organic matter for the soil: as grounds break down they add organic matter, which improves soil structure and water handling over time.`,
+      `Earthworm friendly: earthworms feed on coffee grounds, and worm bins accept them in moderation.`,
+      `A free resource: many cafes give away used grounds if you ask, which also keeps them out of landfill.`,
     ],
     limitations: [
-      'Contains residual caffeine, which can inhibit seed germination and stunt seedling growth (allelopathic effect).',
-      'Dries into an hydrophobic crust that prevents rainwater from reaching root systems if applied as an unmixed surface layer.',
-      'Excessive amounts in a worm bin can overheat the bedding.'
+      `Not a fertilizer: extension sources put nitrogen content at about 1 to 2 percent, and soil microbes use nitrogen while breaking the grounds down, which can temporarily tie it up if you mix a lot of fresh grounds into soil.`,
+      `Does not reliably acidify soil: the pH of decomposing grounds swings widely over time, from mildly acidic to somewhat alkaline, and any change tends to be short-lived and local.`,
+      `Thick layers compact: grounds are very fine and, applied thickly, can pack together and slow the movement of water and air into the soil.`,
+      `No proven pest control: a Washington State University review found no published evidence that grounds repel or kill garden pests.`,
+      `Fast growth, bigger yields and pest control are not on the supported list — research there is thin or mixed, and fresh grounds applied heavily have inhibited growth in several tested plant species.`,
     ],
     mythsBusted: [
       {
-        myth: 'Used coffee grounds will turn hydrangeas bright blue by acidifying the soil.',
-        reality: 'Fresh unbrewed coffee is acidic, but brewed grounds have a nearly neutral pH of 6.5–6.8. They will not drastically lower your soil pH to turn hydrangeas blue.'
+        myth: `Coffee grounds acidify soil.`,
+        reality: `Mostly myth. Brewing pulls most of the acidic compounds into the coffee, so the leftover grounds are much less acidic than the drink. Oregon State University Extension reports a typical pH close to neutral, around 6.5 to 6.8; a University of Missouri horticulturist notes used grounds can even run slightly alkaline; and Washington State University's review found the pH of decomposing grounds swings widely, with any change tending to be short-lived and local.`
       },
       {
-        myth: 'Coffee grounds kill all garden pests and repel cats permanently.',
-        reality: 'While the texture and odor may discourage some soft-bodied insects, research shows pests quickly adapt, and rain washes away the scent.'
-      }
+        myth: `Used coffee grounds are a nitrogen fertilizer.`,
+        reality: `Overstated. Extension sources put nitrogen at only about 1 to 2 percent, and soil microbes also use nitrogen while they break the grounds down, which can temporarily tie it up if a lot of fresh grounds are mixed into soil.`
+      },
+      {
+        myth: `Coffee grounds repel slugs and cats.`,
+        reality: `Unproven. A Washington State University review found no published evidence that grounds repel or kill garden pests, so do not rely on them for pest control. Oregon State researchers did find that a strong caffeine solution (1 to 2 percent) drove slugs away in tests — that is a concentrated liquid, not a sprinkle of used grounds, and not something to improvise around your plants.`
+      },
+      {
+        myth: `Grounds make a good thick mulch by themselves.`,
+        reality: `Not advised. Pure grounds compact and can restrict air and water. Spread no more than about half an inch and cover it with a coarser mulch such as wood chips or shredded leaves.`
+      },
+      {
+        myth: `Grounds help every plant.`,
+        reality: `No. Fresh grounds applied heavily have inhibited growth in several tested plant species, and heavy applications have been linked to reduced germination and early growth in seed beds.`
+      },
     ],
     commonMistakes: [
-      'Dumping thick 2-inch mounds of wet coffee grounds around the base of young seedlings.',
-      'Using coffee grounds around newly sown vegetable seeds (residual caffeine suppresses sprouting).',
-      'Storing wet grounds in an airtight bucket where green trichoderma mold turns into stinky anaerobic sludge.'
+      `Applying a thick layer of grounds to the soil surface.`,
+      `Using grounds to "acidify" soil without testing.`,
+      `Adding grounds to a seed bed or around young seedlings.`,
+      `Letting wet grounds sit in a pile where they turn slimy and smelly.`,
+      `Putting raw grounds on top of houseplant soil.`,
+      `Treating grounds as a replacement for a balanced fertilizer or a soil test.`,
     ],
     safetyPrecautions: [
-      'Keep large quantities of coffee grounds away from dogs; ingested grounds contain concentrated methylxanthines that are toxic to canines.',
-      'Avoid using grounds directly on newly rooted indoor houseplants.'
+      `Seedlings and seed beds: avoid heavy applications — they have been linked to reduced germination and early growth, including caffeine residue effects noted by Oregon State.`,
+      `Acid-loving plants (blueberries, rhododendrons, azaleas): do not count on grounds to adjust pH. Get a soil test and use a purpose-made soil acidifier only if the test calls for one.`,
+      `Do not rely on grounds for pest control — a Washington State University review found no published evidence that grounds repel or kill garden pests.`,
+      `Soil conditions vary, so confirm with a soil test or your local extension office before making large changes.`,
     ],
     faqs: [
       {
-        question: 'Can I put unbleached coffee filters in the compost too?',
-        answer: 'Yes! Paper coffee filters are pure cellulose (a brown carbon source) and decompose rapidly within 2 to 4 weeks in an active pile.'
+        question: `Are used coffee grounds good for plants?`,
+        answer: `They can be, mainly as a compost ingredient or a thin mulch layer. Used grounds add organic matter and a little nitrogen, but they are not a complete fertilizer, and thick layers of fresh grounds can slow plant growth.`
       },
       {
-        question: 'Are unbrewed coffee grounds safe for plants?',
-        answer: 'No. Unbrewed fresh grounds retain their acidity (pH ~5.0) and high caffeine levels, which stunts plant growth. Always brew or thoroughly compost first.'
-      }
+        question: `Are coffee grounds acidic?`,
+        answer: `Not reliably. Brewing removes most of the acids, and measured pH of used grounds ranges from slightly acidic to slightly alkaline. They will not dependably lower your soil pH.`
+      },
+      {
+        question: `Can I put coffee grounds directly on soil?`,
+        answer: `A very thin layer, mixed in or topped with a coarser mulch, is the safer way. Piling grounds thickly on the surface can form a crust that blocks water and air.`
+      },
+      {
+        question: `Do coffee grounds help tomatoes?`,
+        answer: `There is no strong evidence that coffee grounds boost tomato yield. Adding them to compost first, then using the finished compost, is the lower-risk route.`
+      },
+      {
+        question: `Do coffee grounds keep slugs or cats away?`,
+        answer: `Evidence is weak. University reviews found no published proof that grounds repel garden pests, so do not rely on them for pest control.`
+      },
+      {
+        question: `Can I use coffee grounds on houseplants?`,
+        answer: `Use caution. Grounds on top of potted soil often stay wet, mold, and compact. A better option is to compost them first or mix a very small amount into a potting mix.`
+      },
+      {
+        question: `How much coffee grounds can I put in compost?`,
+        answer: `Keep them to roughly 10 to 20 percent of the pile by volume and balance them with dry brown materials like leaves or shredded cardboard.`
+      },
     ],
     references: [
-      'Washington State University Extension: "Coffee Grounds in the Garden and Landscape"',
-      'Soil Science Society of America: "Recycling Used Coffee Grounds in Horticultural Soils"',
-      'University of California Agriculture and Natural Resources: "Composting with Coffee"'
+      { title: `Using Coffee Grounds in Gardens and Landscapes (Washington State University Extension)`, url: 'https://pubs.extension.wsu.edu/?p=11208' },
+      { title: `Coffee Grounds boost soil health (Oregon State University Extension)`, url: 'https://extension.oregonstate.edu/es/news/coffee-grounds-boost-soil-health-help-control-slugs' },
+      { title: `Is trouble brewing in your garden? (University of Missouri Extension)`, url: 'https://extension.missouri.edu/news/is-trouble-brewing-in-your-garden' },
+      { title: `Using Coffee Grounds in the Garden (University of Arizona Cooperative Extension)`, url: 'https://cales.arizona.edu/yavapai/anr/hort/byg/archive/coffeegrounds.html' },
+      { title: `Coffee Grounds, Eggshells and Epsom Salts in the Home Garden (University of Minnesota Extension)`, url: 'https://extension.umn.edu/manage-soil-nutrients/coffee-grounds-eggshells-epsom-salts' },
     ],
-    relatedGuideSlugs: ['banana-peels-for-plants', 'tea-leaves-for-plants', 'vegetable-scraps-for-compost']
+    additionalSections: [
+      {
+        title: 'What Is Actually in Used Coffee Grounds?',
+        blocks: [
+          { type: 'paragraph', text: `Understanding the makeup explains almost every do and don't below.` },
+          { type: 'paragraph', text: `**Nitrogen.** Extension sources put the nitrogen content of used grounds at about 1 to 2 percent. That is real, but it is not enough to treat grounds as a fertilizer. Soil microbes also use nitrogen while they break the grounds down, which can temporarily tie it up if you mix a lot of fresh grounds into soil.` },
+          { type: 'paragraph', text: `**Carbon to nitrogen ratio.** Estimates range from roughly 20:1 to 24:1. In composting terms that makes grounds a "green" (nitrogen-supplying) material even though they look brown and dark. Treat them like grass clippings, not like dry leaves.` },
+          { type: 'paragraph', text: `**pH.** This is the most repeated myth, so it gets its own section below.` },
+          { type: 'paragraph', text: `**Texture.** Grounds are very fine. When they are applied thickly they can pack together and slow the movement of water and air into the soil.` },
+        ]
+      },
+      {
+        title: 'Used Coffee Grounds for Plants: Are They Acidic?',
+        blocks: [
+          { type: 'paragraph', text: `Much of the internet says coffee grounds acidify soil, so people spread them around blueberries and azaleas. Extension research does not back that up.` },
+          {
+            type: 'bullets',
+            items: [
+              `Brewing pulls most of the acidic compounds into the coffee, so the leftover grounds are much less acidic than the drink. Oregon State University Extension reports a typical pH close to neutral, around 6.5 to 6.8, and a University of Missouri horticulturist notes used grounds can even run slightly alkaline.`,
+              `Washington State University's review found the pH of decomposing grounds swings widely over time, from mildly acidic to somewhat alkaline, and any change tends to be short-lived and local.`,
+            ]
+          },
+          { type: 'note', text: `**What this means for you:** do not use coffee grounds to lower pH. If you grow acid-loving plants such as blueberries, rhododendrons or azaleas, get a soil test and use a purpose-made soil acidifier if the test calls for one.` },
+          { type: 'note', text: `**Fresh vs used grounds.** Everything on this page is about used (brewed) grounds. Fresh, unbrewed grounds still hold more caffeine and acidic compounds and are not recommended for direct use on plants.` },
+        ]
+      },
+      {
+        title: 'How Much Coffee Grounds Should You Use?',
+        blocks: [
+          {
+            type: 'table',
+            headers: ['Use', 'General guideline', 'Notes'],
+            rows: [
+              ['Compost pile', 'About 10 to 20% of volume (up to ~25% in hot piles)', 'Balance with browns'],
+              ['Mulch', 'Half an inch or less, covered with coarse mulch', 'Never pure thick grounds'],
+              ['Garden soil', 'Small amounts, mixed thoroughly', 'Add a nitrogen source if using a lot'],
+              ['Potted plants', 'Avoid raw grounds on top', 'Use finished compost instead'],
+            ]
+          },
+          { type: 'paragraph', text: `These are general guidelines drawn from university extension advice, not exact prescriptions. Your soil, climate and plants matter, so a soil test is always the best guide.` },
+        ]
+      },
+      {
+        title: 'Which Plants Like Coffee Grounds?',
+        blocks: [
+          {
+            type: 'bullets',
+            items: [
+              `**Compost-fed vegetables and flowers:** they benefit indirectly from the finished compost.`,
+              `**Tomatoes, peppers, leafy greens:** no strong evidence of a direct benefit. If you use grounds, put them through compost first.`,
+              `**Seedlings and seed beds:** avoid. Heavy applications have been linked to reduced germination and early growth, including caffeine residue effects noted by Oregon State.`,
+              `**Acid-loving plants (blueberries, azaleas):** do not count on grounds to adjust pH.`,
+            ]
+          },
+        ]
+      },
+      {
+        title: 'Coffee Grounds and Eggshells Together',
+        blocks: [
+          { type: 'paragraph', text: `Gardeners often combine them because both are free kitchen scraps. They belong in the compost together, but they do not balance each other's pH, since used grounds are not reliably acidic. See our guide to [eggshells for plants](/waste-to-garden/eggshells-for-plants) for how to prepare and use shells properly.` },
+        ]
+      },
+    ],
+    bottomLine: `Used coffee grounds earn their place in the garden when you compost them or use them in thin layers. Skip the acidifying and pest-control claims, avoid thick piles, and let the compost bin do the heavy lifting. Next: learn how to [make compost at home](/composting/how-to-make-compost-at-home) or read our guide to [eggshells for plants](/waste-to-garden/eggshells-for-plants).`,
+    relatedGuideSlugs: ['eggshells-for-plants', 'green-vs-brown-materials', 'how-to-make-compost-at-home']
   },
   {
     id: 'orange-peels',

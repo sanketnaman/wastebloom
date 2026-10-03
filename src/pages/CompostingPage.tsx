@@ -63,9 +63,9 @@ export const CompostingPage: React.FC<CompostingPageProps> = ({ onNavigate }) =>
       {/* Guides Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {filtered.map((guide) => (
-          <div
+          <a
             key={guide.id}
-            onClick={() => onNavigate(`/composting/${guide.slug}`)}
+            href={`/composting/${guide.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/composting/${guide.slug}`); }}
             className="bg-white rounded-3xl overflow-hidden border border-[#E3EDE1] hover:border-[#387A53] transition cursor-pointer shadow-xs hover:shadow-md flex flex-col group"
           >
             <div className="relative h-44 overflow-hidden">
@@ -97,7 +97,7 @@ export const CompostingPage: React.FC<CompostingPageProps> = ({ onNavigate }) =>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition" />
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 

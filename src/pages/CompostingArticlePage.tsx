@@ -154,16 +154,16 @@ export const CompostingArticlePage: React.FC<CompostingArticlePageProps> = ({ sl
             <h3 className="text-xl font-bold text-[#183D32] mb-6">Related Composting Guides</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {relatedGuides.map((rel) => (
-                <div
+                <a
                   key={rel.id}
-                  onClick={() => onNavigate(`/composting/${rel.slug}`)}
+            href={`/composting/${rel.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/composting/${rel.slug}`); }}
                   className="p-4 rounded-2xl bg-white border border-[#E3EDE1] hover:border-[#387A53] cursor-pointer transition shadow-xs group"
                 >
                   <h4 className="text-xs font-bold text-[#183D32] group-hover:text-[#387A53] transition line-clamp-2">
                     {rel.title}
                   </h4>
                   <p className="text-[11px] text-[#78847D] mt-1">{rel.category}</p>
-                </div>
+                </a>
               ))}
             </div>
           </section>

@@ -62,9 +62,9 @@ export const DIYProjectsPage: React.FC<DIYProjectsPageProps> = ({ onNavigate }) 
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filtered.map((project) => (
-          <div
+          <a
             key={project.id}
-            onClick={() => onNavigate(`/diy-garden-projects/${project.slug}`)}
+            href={`/diy-garden-projects/${project.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/diy-garden-projects/${project.slug}`); }}
             className="bg-white rounded-3xl overflow-hidden border border-[#E3EDE1] hover:border-[#387A53] transition cursor-pointer shadow-xs hover:shadow-md flex flex-col group"
           >
             <div className="relative h-56 overflow-hidden">
@@ -107,7 +107,7 @@ export const DIYProjectsPage: React.FC<DIYProjectsPageProps> = ({ onNavigate }) 
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>

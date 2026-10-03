@@ -63,9 +63,9 @@ export const WasteToGardenPage: React.FC<WasteToGardenPageProps> = ({ onNavigate
       {/* Grid of Waste Guides */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredGuides.map((guide) => (
-          <div
+          <a
             key={guide.id}
-            onClick={() => onNavigate(`/waste-to-garden/${guide.slug}`)}
+            href={`/waste-to-garden/${guide.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/waste-to-garden/${guide.slug}`); }}
             className="bg-white rounded-3xl overflow-hidden border border-[#E3EDE1] hover:border-[#387A53] transition cursor-pointer shadow-xs hover:shadow-md flex flex-col group"
           >
             <div className="relative h-56 overflow-hidden">
@@ -103,7 +103,7 @@ export const WasteToGardenPage: React.FC<WasteToGardenPageProps> = ({ onNavigate
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>

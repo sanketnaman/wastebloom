@@ -1,4 +1,4 @@
-import { GardeningGuideItem } from '../types';
+import type { GardeningGuideItem } from '../types';
 
 export const gardeningGuides: GardeningGuideItem[] = [
   {

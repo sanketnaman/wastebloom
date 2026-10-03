@@ -34,8 +34,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo with Leaf & Recycling Sprout */}
-          <div
-            onClick={() => handleNavClick('/')}
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('/');
+            }}
             className="flex items-center gap-2.5 cursor-pointer group select-none shrink-0"
           >
             <div className="w-10 h-10 rounded-xl bg-[#367B53] text-[#C6E75A] p-2 flex items-center justify-center transition shadow-xs group-hover:scale-105">
@@ -62,16 +66,21 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                 Upcycle & Grow
               </span>
             </div>
-          </div>
+          </a>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {navLinks.map((link) => {
               const active = isActive(link.path);
               return (
-                <button
+                <a
                   key={link.path}
-                  onClick={() => handleNavClick(link.path)}
+                  href={link.path}
+                  aria-current={active ? 'page' : undefined}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(link.path);
+                  }}
                   className={`px-3.5 py-2 rounded-lg text-xs xl:text-sm transition ${
                     active
                       ? 'text-[#153F32] font-bold'
@@ -79,7 +88,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
                   }`}
                 >
                   {link.label}
-                </button>
+                </a>
               );
             })}
           </nav>
@@ -97,13 +106,17 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
             </div>
 
             {/* Waste Scanner Button */}
-            <button
-              onClick={() => handleNavClick('/waste-scanner')}
+            <a
+              href="/waste-scanner"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('/waste-scanner');
+              }}
               className="px-4 py-2 rounded-full bg-[#153F32] hover:bg-[#1f5645] text-white text-xs font-bold shadow-xs transition flex items-center gap-2 shrink-0 group"
             >
               <Camera className="w-3.5 h-3.5 text-white" />
               <span>Waste Scanner</span>
-            </button>
+            </a>
           </div>
 
           {/* Mobile hamburger button */}
@@ -130,25 +143,33 @@ export const Header: React.FC<HeaderProps> = ({ currentPath, onNavigate, onOpenS
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white border-t border-[#E3ECE0] px-4 pt-3 pb-6 space-y-2 animate-fadeIn shadow-md">
           {navLinks.map((link) => (
-            <button
+            <a
               key={link.path}
-              onClick={() => handleNavClick(link.path)}
-              className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
+              href={link.path}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick(link.path);
+              }}
+              className={`block w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition ${
                 isActive(link.path)
                   ? 'bg-[#E8F0E5] text-[#153F32] font-bold'
                   : 'text-[#3E4D44] hover:bg-[#F8F6EC]'
               }`}
             >
               {link.label}
-            </button>
+            </a>
           ))}
           <div className="pt-2">
-            <button
-              onClick={() => handleNavClick('/waste-scanner')}
-              className="w-full py-3 rounded-full bg-[#153F32] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-xs"
+            <a
+              href="/waste-scanner"
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavClick('/waste-scanner');
+              }}
+              className="block w-full py-3 rounded-full bg-[#153F32] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-xs"
             >
               <Camera className="w-4 h-4" /> AI Waste Scanner
-            </button>
+            </a>
           </div>
         </div>
       )}

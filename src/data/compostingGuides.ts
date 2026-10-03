@@ -1,4 +1,4 @@
-import { CompostingGuideItem } from '../types';
+import type { CompostingGuideItem } from '../types';
 
 export const compostingGuides: CompostingGuideItem[] = [
   {

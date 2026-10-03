@@ -1,3 +1,22 @@
+export type ReviewStatus = 'needs-human-review' | 'human-reviewed';
+
+export interface GuideReference {
+  title: string;
+  url?: string;
+}
+
+export type GuideBlock =
+  | { type: 'paragraph'; text: string }
+  | { type: 'bullets'; items: string[] }
+  | { type: 'numbered'; items: string[] }
+  | { type: 'table'; headers: string[]; rows: string[][] }
+  | { type: 'note'; text: string };
+
+export interface GuideContentSection {
+  title: string;
+  blocks: GuideBlock[];
+}
+
 export interface WasteGuideItem {
   id: string;
   slug: string;
@@ -13,6 +32,23 @@ export interface WasteGuideItem {
   featuredImage: string;
   imageAlt: string;
   quickAnswer: string;
+  /** Opening introduction rendered above the Quick Answer box. */
+  introduction?: string[];
+  /** Caption shown under the featured image. */
+  featuredImageCaption?: string;
+  /** Unique SEO title. Falls back to `title` when absent. */
+  metaTitle?: string;
+  /** Unique SEO/meta description. Falls back to `excerpt` when absent. */
+  metaDescription?: string;
+  publishedAt?: string;
+  updatedAt?: string;
+  reviewStatus?: ReviewStatus;
+  author?: string;
+  reviewedBy?: string;
+  /** Source sections that do not map onto the standard article blocks. */
+  additionalSections?: GuideContentSection[];
+  /** Closing takeaway shown as a highlighted callout. */
+  bottomLine?: string;
   directSoilUsage: {
     allowed: boolean;
     explanation: string;
@@ -39,7 +75,7 @@ export interface WasteGuideItem {
     question: string;
     answer: string;
   }[];
-  references: string[];
+  references: Array<string | GuideReference>;
   relatedGuideSlugs: string[];
 }
 

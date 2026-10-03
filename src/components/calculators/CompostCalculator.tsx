@@ -1,51 +1,27 @@
 import React, { useState } from 'react';
 import { Copy, Check, Printer, RotateCcw, Info, Box } from 'lucide-react';
+import { BIN_PRESETS, computeBinVolume, US_GALLONS_PER_CUBIC_FOOT, HOT_PILE_MIN_CU_FT, LITRES_PER_CUBIC_METER } from '../../lib/compostVolume';
 
 export const CompostCalculator: React.FC = () => {
   const [unit, setUnit] = useState<'imperial' | 'metric'>('imperial');
-  
+
   // Dimensions
   const [length, setLength] = useState<number>(3); // ft or m
   const [width, setWidth] = useState<number>(3);
   const [height, setHeight] = useState<number>(3);
   const [copied, setCopied] = useState(false);
 
-  const presets = [
-    { name: 'Standard 3x3x3 ft Pallet Bin', length: 3, width: 3, height: 3, unit: 'imperial' as const },
-    { name: 'Dual-Chamber Tumbler (45 Gal)', length: 2, width: 2, height: 2, unit: 'imperial' as const },
-    { name: 'Urban 1x1x1 m Eco Bin', length: 1, width: 1, height: 1, unit: 'metric' as const },
-    { name: 'Small Balcony Planter Box', length: 1.5, width: 1.5, height: 1.5, unit: 'imperial' as const },
-  ];
+  const presets = BIN_PRESETS;
 
-  // Calculations
-  let cuFt = 0;
-  let cuYards = 0;
-  let litres = 0;
-  let finishedEstCuFt = 0;
-  let finishedEstLitres = 0;
-
-  if (unit === 'imperial') {
-    cuFt = length * width * height;
-    cuYards = cuFt / 27;
-    litres = cuFt * 28.3168;
-    // Shrinkage rule: 50% volume loss during composting
-    finishedEstCuFt = cuFt * 0.5;
-    finishedEstLitres = litres * 0.5;
-  } else {
-    // length, width, height in meters
-    const cuMeters = length * width * height;
-    litres = cuMeters * 1000;
-    cuFt = litres / 28.3168;
-    cuYards = cuFt / 27;
-    finishedEstCuFt = cuFt * 0.5;
-    finishedEstLitres = litres * 0.5;
-  }
+  const volume = computeBinVolume(length, width, height, unit);
+  const { cuFt, cuYd, litres, gallons, finishedMinCuFt, finishedMaxCuFt, finishedMinLitres, finishedMaxLitres } = volume;
 
   const handleCopy = () => {
     const text = `WasteBloom Compost Bin Volume Calculation:
 - Dimensions: ${length} x ${width} x ${height} ${unit === 'imperial' ? 'feet' : 'meters'}
-- Total Raw Volume: ${cuFt.toFixed(1)} cu ft (${cuYards.toFixed(2)} cu yds / ${Math.round(litres)} litres)
-- Estimated Finished Compost Yield (approx. 50% volume reduction): ${finishedEstCuFt.toFixed(1)} cu ft (${Math.round(finishedEstLitres)} litres)`;
+- Total Raw Volume: ${cuFt.toFixed(1)} cu ft (${cuYd.toFixed(2)} cu yds / ${Math.round(litres)} litres / ${Math.round(gallons)} US gallons)
+- Estimated Finished Compost Yield (40% to 60% volume retained): ~${finishedMinCuFt.toFixed(1)} to ${finishedMaxCuFt.toFixed(1)} cu ft (~${Math.round(finishedMinLitres)} to ${Math.round(finishedMaxLitres)} litres)
+- Hot-pile self-insulating mass (>= ${HOT_PILE_MIN_CU_FT} cu ft): ${volume.isHotPileSized ? 'yes' : 'no'}`;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -224,7 +200,7 @@ export const CompostCalculator: React.FC = () => {
           </div>
           <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
             <span className="text-xs text-[#E3EDE1]">Cubic Yards</span>
-            <div className="text-2xl md:text-3xl font-extrabold text-[#B6D96A] mt-1">{cuYards.toFixed(2)} <span className="text-xs font-normal text-[#E3EDE1]">cu yd</span></div>
+            <div className="text-2xl md:text-3xl font-extrabold text-[#B6D96A] mt-1">{cuYd.toFixed(2)} <span className="text-xs font-normal text-[#E3EDE1]">cu yd</span></div>
           </div>
           <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
             <span className="text-xs text-[#E3EDE1]">Litres</span>
@@ -232,8 +208,8 @@ export const CompostCalculator: React.FC = () => {
           </div>
           <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
             <span className="text-xs text-[#E3EDE1]">Min. Size for Hot Pile</span>
-            <div className={`text-base md:text-lg font-bold mt-2 ${cuFt >= 27 ? 'text-[#B6D96A]' : 'text-amber-300'}`}>
-              {cuFt >= 27 ? '✓ Sufficient (Hot)' : '⚠ Small (Passive/Cold)'}
+            <div className={`text-base md:text-lg font-bold mt-2 ${volume.isHotPileSized ? 'text-[#B6D96A]' : 'text-amber-300'}`}>
+              {volume.isHotPileSized ? '✓ Sufficient (Hot)' : '⚠ Small (Passive/Cold)'}
             </div>
           </div>
         </div>
@@ -243,9 +219,9 @@ export const CompostCalculator: React.FC = () => {
           <Info className="w-5 h-5 text-[#B6D96A] shrink-0 mt-0.5" />
           <div className="text-xs text-[#E3EDE1] leading-relaxed">
             <strong className="text-white block font-semibold text-sm mb-1">
-              Estimated Finished Compost Yield: ~{finishedEstCuFt.toFixed(1)} cu ft ({Math.round(finishedEstLitres)} Litres)
+              Estimated Finished Compost Yield: ~{finishedMinCuFt.toFixed(1)}–{finishedMaxCuFt.toFixed(1)} cu ft (~{Math.round(finishedMinLitres)}–{Math.round(finishedMaxLitres)} L)
             </strong>
-            Organic materials lose roughly <strong>40% to 60% of their volume</strong> during decomposition as moisture evaporates and carbon escapes as carbon dioxide. This calculator represents total physical container volume, not finished harvest volume.
+            Organic materials lose roughly <strong>40% to 60% of their volume</strong> during decomposition as moisture evaporates and carbon escapes as carbon dioxide, so finished yield is shown as a range rather than a single figure. This calculator reports total physical container volume, not finished harvest volume.
           </div>
         </div>
       </div>
@@ -253,8 +229,9 @@ export const CompostCalculator: React.FC = () => {
       {/* Formula explanation */}
       <div className="border-t border-[#E3EDE1] pt-6 text-xs text-[#78847D] space-y-2">
         <h4 className="font-bold text-[#183D32] text-sm">Horticultural Formula & Rules:</h4>
-        <p>• <strong>Imperial Volume:</strong> Length (ft) × Width (ft) × Height (ft) = Total Cubic Feet. 27 Cubic Feet = 1 Cubic Yard.</p>
-        <p>• <strong>Metric Volume:</strong> Length (m) × Width (m) × Height (m) = Cubic Meters. 1 Cubic Meter = 1,000 Litres.</p>
+        <p>• <strong>Imperial Volume:</strong> Length (ft) × Width (ft) × Height (ft) = Total Cubic Feet. 27 Cubic Feet = 1 Cubic Yard. 1 Cubic Foot ≈ {US_GALLONS_PER_CUBIC_FOOT} US Gallons (used to check the “45 Gal” tumbler preset).</p>
+        <p>• <strong>Metric Volume:</strong> Length (m) × Width (m) × Height (m) = Cubic Meters. 1 Cubic Meter = {LITRES_PER_CUBIC_METER.toLocaleString()} Litres.</p>
+        <p>• <strong>Finished Yield Range:</strong> Compost loses about 40% to 60% of its starting volume, so the estimate is shown as a range: 60% retained (upper bound) down to 40% retained (lower bound).</p>
         <p>• <strong>Minimum Hot Composting Threshold:</strong> A pile requires at least 1 cubic yard (3×3×3 feet = 27 cu ft / ~760 Litres) of self-insulating mass to reliably sustain thermophilic internal temperatures of 130°F to 160°F (55°C–71°C).</p>
       </div>
     </div>

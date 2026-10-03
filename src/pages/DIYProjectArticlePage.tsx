@@ -179,15 +179,15 @@ export const DIYProjectArticlePage: React.FC<DIYProjectArticlePageProps> = ({ sl
           <h3 className="text-xl font-bold text-[#183D32] mb-6">More DIY Upcycling Projects</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {related.map((rel) => (
-              <div
+              <a
                 key={rel.id}
-                onClick={() => onNavigate(`/diy-garden-projects/${rel.slug}`)}
+            href={`/diy-garden-projects/${rel.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/diy-garden-projects/${rel.slug}`); }}
                 className="p-4 rounded-2xl bg-white border border-[#E3EDE1] hover:border-[#387A53] cursor-pointer transition shadow-xs group"
               >
                 <img src={rel.featuredImage} alt={rel.imageAlt} className="w-full h-32 rounded-xl object-cover mb-3" />
                 <h4 className="text-xs font-bold text-[#183D32] group-hover:text-[#387A53] transition line-clamp-1">{rel.title}</h4>
                 <p className="text-[11px] text-[#78847D] mt-1">{rel.timeEstimate} • {rel.difficulty}</p>
-              </div>
+              </a>
             ))}
           </div>
         </section>

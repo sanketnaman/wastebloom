@@ -163,6 +163,8 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
   const [selectedFileName, setSelectedFileName] = useState<string>('');
   const [analyzing, setAnalyzing] = useState(false);
   const [result, setResult] = useState<AIScanResult | null>(null);
+  const [resultSource, setResultSource] = useState<'ai' | 'demo' | null>(null);
+  const [analysisError, setAnalysisError] = useState<string | null>(null);
   const [aiStatus, setAiStatus] = useState<{ enabled: boolean; message: string } | null>(null);
   const [activeSample, setActiveSample] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -175,7 +177,7 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
       .catch(() => {
         setAiStatus({
           enabled: false,
-          message: 'AI Waste Scanner is currently in preview mode. You can test sample kitchen items or explore our curated gardening guides!',
+          message: 'AI image analysis is not available right now. Sample items and all guides still work.',
         });
       });
   }, []);
@@ -201,6 +203,8 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
     reader.onload = (event) => {
       setSelectedImage(event.target?.result as string);
       setResult(null);
+      setResultSource(null);
+      setAnalysisError(null);
     };
     reader.readAsDataURL(file);
   };
@@ -210,15 +214,25 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
     setSelectedFileName(sample.name);
     setActiveSample(sample.name);
     setResult(null);
+    setResultSource(null);
+    setAnalysisError(null);
   };
 
   const handleAnalyze = async () => {
     if (!selectedImage) return;
 
     setAnalyzing(true);
+    setAnalysisError(null);
 
-    // If this is one of our sample items, use the rich fact-checked data or query AI
     const matchingSample = SAMPLE_ITEMS.find((s) => s.name === activeSample);
+
+    // Sample items use curated, fact-checked demo data — no AI call is made.
+    if (matchingSample) {
+      setResult(matchingSample.fallbackData);
+      setResultSource('demo');
+      setAnalyzing(false);
+      return;
+    }
 
     try {
       const response = await fetch('/api/ai/scan-waste', {
@@ -234,39 +248,17 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
 
       if (json.available && json.data) {
         setResult(json.data);
-      } else if (matchingSample) {
-        // Fallback to rich curated data per PRD §6.1 & §7.5
-        setResult(matchingSample.fallbackData);
+        setResultSource('ai');
       } else {
-        // General fallback for uploaded images when AI is in preview
-        setResult({
-          identifiedMaterial: selectedFileName.replace(/\.[^/.]+$/, '') || 'Household Organic Scrap',
-          confidence: 'Medium',
-          compostSuitability: 'Suitable with preparation',
-          gardeningApplications: [
-            'Compost bin organic matter',
-            'Moisture regulator when balanced with dry browns',
-          ],
-          preparation: [
-            'Chop into 1-inch pieces to accelerate microbial colonization',
-            'Ensure clean of plastic labels, twist ties, and stickers',
-            'Balance with 2 to 3 parts dry leaves or shredded cardboard',
-          ],
-          usageGuidance: 'Add to an aerated outdoor compost pile or bokashi fermentation bucket. Turn regularly to ensure oxygen reaches the microbes.',
-          precautions: [
-            'Do not leave raw food scraps exposed on the surface of soil where rodents can reach them',
-            'Avoid adding if contaminated with chemical pesticides, synthetic oils, or weed seeds',
-          ],
-          mythsBusted: 'Raw kitchen waste does not immediately nourish plant roots; organic matter must first be broken down by bacteria and fungi into bioavailable ionic elements.',
-          cToNRatio: 'Estimated 25:1 (Green Nitrogen)',
-        });
+        // AI is not configured on this server — say so instead of inventing a result.
+        setAnalysisError(
+          'AI image analysis is not configured on this server, so your photo was not analyzed. Try a sample item above for a curated demonstration, or browse our fact-checked guides.'
+        );
       }
     } catch {
-      if (matchingSample) {
-        setResult(matchingSample.fallbackData);
-      } else {
-        alert('Could not complete analysis. Please try again.');
-      }
+      setAnalysisError(
+        'Could not reach the analysis service, so no result was produced. Please try again, or use a sample item above.'
+      );
     } finally {
       setAnalyzing(false);
     }
@@ -276,6 +268,8 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
     setSelectedImage(null);
     setSelectedFileName('');
     setResult(null);
+    setResultSource(null);
+    setAnalysisError(null);
     setActiveSample(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -306,8 +300,8 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
         <div className="mb-6 p-4 rounded-2xl bg-[#F8F6EE] border border-[#CBD5CD] flex items-start gap-3">
           <Info className="w-5 h-5 text-[#387A53] shrink-0 mt-0.5" />
           <div className="text-xs text-[#26332D]">
-            <strong className="block text-sm font-bold text-[#183D32] mb-0.5">AI Waste Scanner is coming soon!</strong>
-            You can still test with our quick-select sample kitchen items below or explore our fact-checked manual gardening guides. All calculations and guidance work fully!
+            <strong className="block text-sm font-bold text-[#183D32] mb-0.5">AI image analysis is not configured on this server</strong>
+            Uploaded photos will not be analyzed here. The quick-select sample items below show curated demonstration results, and all of our fact-checked guides and calculators work fully.
           </div>
         </div>
       )}
@@ -415,6 +409,17 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
         />
       </div>
 
+      {/* Honest error box when no result could be produced */}
+      {analysisError && !result && (
+        <div className="mb-6 p-4 rounded-2xl bg-amber-50 border border-amber-200 flex items-start gap-3" role="alert">
+          <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+          <div className="text-xs text-amber-900">
+            <strong className="block text-sm font-bold text-amber-900 mb-0.5">No analysis result</strong>
+            {analysisError}
+          </div>
+        </div>
+      )}
+
       {/* Analysis Results Display */}
       {result && (
         <div className="bg-[#183D32] text-white p-6 md:p-10 rounded-3xl shadow-lg border border-white/10 space-y-6 animate-fadeIn">
@@ -423,9 +428,15 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
             <div>
               <div className="flex items-center gap-2">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#B6D96A]">Identification Result</span>
-                <span className="px-2 py-0.5 rounded text-[10px] bg-white/10 text-[#E3EDE1]">
-                  Confidence: {result.confidence}
-                </span>
+                {resultSource === 'demo' ? (
+                  <span className="px-2 py-0.5 rounded text-[10px] bg-[#B6D96A] text-[#183D32] font-bold">
+                    Sample data — demonstration
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 rounded text-[10px] bg-white/10 text-[#E3EDE1]">
+                    Confidence: {result.confidence}
+                  </span>
+                )}
               </div>
               <h3 className="text-2xl md:text-3xl font-extrabold text-white mt-1">
                 {result.identifiedMaterial}

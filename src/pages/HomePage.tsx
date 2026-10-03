@@ -40,7 +40,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
   // Newsletter state
   const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
+  const [newsletterState, setNewsletterState] = useState<{
+    status: 'idle' | 'submitting' | 'success' | 'unconfigured' | 'error';
+    message?: string;
+  }>({ status: 'idle' });
 
   // Example samples for quick click
   const sampleItems = [
@@ -214,11 +217,41 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     }
   };
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newsletterEmail || !newsletterEmail.includes('@')) return;
-    setNewsletterSubscribed(true);
-    setNewsletterEmail('');
+    const email = newsletterEmail.trim();
+    if (!email || !email.includes('@')) return;
+    setNewsletterState({ status: 'submitting' });
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'homepage' }),
+      });
+      const json = await response.json();
+      if (json.configured === false) {
+        setNewsletterState({
+          status: 'unconfigured',
+          message: json.message ?? 'Newsletter signup is not configured on this server yet.',
+        });
+      } else if (json.subscribed) {
+        setNewsletterState({
+          status: 'success',
+          message: json.message ?? 'Your address was submitted to our newsletter service.',
+        });
+        setNewsletterEmail('');
+      } else {
+        setNewsletterState({
+          status: 'error',
+          message: json.message ?? 'Subscription failed. Please try again later.',
+        });
+      }
+    } catch {
+      setNewsletterState({
+        status: 'error',
+        message: 'Could not reach the newsletter service. Please try again later.',
+      });
+    }
   };
 
   // 6 Categories matching the reference screenshot
@@ -716,9 +749,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {popularIdeas.map((item, idx) => (
-            <div
+            <a
               key={idx}
-              onClick={() => onNavigate(`/waste-to-garden/${item.slug}`)}
+            href={`/waste-to-garden/${item.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/waste-to-garden/${item.slug}`); }}
               className="bg-white rounded-2xl p-3 border border-[#E2EAE0] hover:border-[#367B53] transition cursor-pointer shadow-2xs hover:shadow-xs group flex flex-col justify-between"
             >
               <div>
@@ -744,7 +777,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 </span>
                 <ChevronRight className="w-3.5 h-3.5 text-[#367B53] group-hover:translate-x-0.5 transition" />
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
@@ -968,9 +1001,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {diyCards.map((proj, i) => (
-            <div
+            <a
               key={i}
-              onClick={() => onNavigate(`/diy-garden-projects/${proj.slug}`)}
+            href={`/diy-garden-projects/${proj.slug}`} onClick={(e) => { e.preventDefault(); onNavigate(`/diy-garden-projects/${proj.slug}`); }}
               className="bg-white rounded-2xl p-3 border border-[#E2EAE0] hover:border-[#367B53] transition cursor-pointer shadow-2xs hover:shadow-xs group flex flex-col justify-between"
             >
               <div>
@@ -991,7 +1024,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   {proj.desc}
                 </p>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
@@ -1030,10 +1063,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             <div className="w-full lg:w-auto">
-              {newsletterSubscribed ? (
+              {newsletterState.status === 'success' ? (
                 <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-[#C6E75A] text-xs font-semibold border border-[#C6E75A]/40">
                   <Check className="w-4 h-4" />
-                  <span>Thank you for subscribing! Check your inbox soon.</span>
+                  <span>{newsletterState.message}</span>
+                </div>
+              ) : newsletterState.status === 'unconfigured' ? (
+                <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-amber-200 text-xs font-semibold border border-amber-300/40">
+                  <AlertTriangle className="w-4 h-4" />
+                  <span>{newsletterState.message}</span>
+                </div>
+              ) : newsletterState.status === 'error' ? (
+                <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 text-rose-200 text-xs font-semibold border border-rose-300/40">
+                  <XCircle className="w-4 h-4" />
+                  <span>{newsletterState.message}</span>
                 </div>
               ) : (
                 <form
@@ -1050,9 +1093,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   />
                   <button
                     type="submit"
-                    className="px-6 py-2 rounded-full bg-[#C6E75A] hover:bg-[#b5d64e] text-[#153F32] text-xs font-extrabold transition shrink-0 shadow-2xs"
+                    disabled={newsletterState.status === 'submitting'}
+                    className="px-6 py-2 rounded-full bg-[#C6E75A] hover:bg-[#b5d64e] text-[#153F32] text-xs font-extrabold transition shrink-0 shadow-2xs disabled:opacity-60"
                   >
-                    Subscribe
+                    {newsletterState.status === 'submitting' ? 'Signing up…' : 'Subscribe'}
                   </button>
                 </form>
               )}

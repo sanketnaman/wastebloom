@@ -1,47 +1,71 @@
 import React, { useEffect } from 'react';
+import { absoluteUrl } from '../config/site';
 
 interface SEOHeadProps {
   title: string;
   description: string;
   ogType?: 'website' | 'article';
-  schema?: Record<string, any>;
+  /** Route path (e.g. `/waste-to-garden/x`) or absolute URL for the canonical link. */
+  canonicalPath?: string;
+  image?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  schema?: Record<string, any> | Array<Record<string, any>>;
 }
+
+const upsertMeta = (attr: 'name' | 'property', key: string, content: string) => {
+  let el = document.querySelector(`meta[${attr}="${key}"]`) as HTMLMetaElement | null;
+  if (!el) {
+    el = document.createElement('meta');
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+};
+
+const upsertLink = (rel: string, href: string) => {
+  let el = document.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
+  if (!el) {
+    el = document.createElement('link');
+    el.setAttribute('rel', rel);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('href', href);
+};
 
 export const SEOHead: React.FC<SEOHeadProps> = ({
   title,
   description,
   ogType = 'website',
+  canonicalPath,
+  image,
+  publishedTime,
+  modifiedTime,
   schema,
 }) => {
   useEffect(() => {
-    // 1. Update Document Title
     const fullTitle = title.includes('WasteBloom') ? title : `${title} – WasteBloom`;
     document.title = fullTitle;
 
-    // 2. Update Meta Description
-    let metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', description);
-    } else {
-      metaDesc = document.createElement('meta');
-      metaDesc.setAttribute('name', 'description');
-      metaDesc.setAttribute('content', description);
-      document.head.appendChild(metaDesc);
-    }
+    upsertMeta('name', 'description', description);
 
-    // 3. Update OG Title
-    let ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', fullTitle);
+    const canonical = canonicalPath ? absoluteUrl(canonicalPath) : null;
+    const ogImage = image ? absoluteUrl(image) : null;
 
-    // 4. Update OG Description
-    let ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', description);
+    upsertMeta('property', 'og:title', fullTitle);
+    upsertMeta('property', 'og:description', description);
+    upsertMeta('property', 'og:type', ogType);
+    if (canonical) upsertMeta('property', 'og:url', canonical);
+    if (ogImage) upsertMeta('property', 'og:image', ogImage);
+    upsertMeta('name', 'twitter:card', ogImage ? 'summary_large_image' : 'summary');
+    upsertMeta('name', 'twitter:title', fullTitle);
+    upsertMeta('name', 'twitter:description', description);
 
-    // 5. Update OG Type
-    let ogTypeMeta = document.querySelector('meta[property="og:type"]');
-    if (ogTypeMeta) ogTypeMeta.setAttribute('content', ogType);
+    if (canonical) upsertLink('canonical', canonical);
 
-    // 6. JSON-LD structured data
+    if (ogType === 'article' && publishedTime) upsertMeta('property', 'article:published_time', publishedTime);
+    if (ogType === 'article' && modifiedTime) upsertMeta('property', 'article:modified_time', modifiedTime);
+
     let jsonLdScript = document.getElementById('page-json-ld');
     if (schema) {
       if (!jsonLdScript) {
@@ -54,7 +78,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     } else if (jsonLdScript) {
       jsonLdScript.remove();
     }
-  }, [title, description, ogType, schema]);
+  }, [title, description, ogType, canonicalPath, image, publishedTime, modifiedTime, schema]);
 
   return null;
 };

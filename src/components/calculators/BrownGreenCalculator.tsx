@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Copy, Check, Printer, RotateCcw, AlertTriangle, CheckCircle, Scale } from 'lucide-react';
+import { assessBrownGreen, RECOMMENDED_BROWNS_MIN, RECOMMENDED_BROWNS_MAX } from '../../lib/brownGreen';
 
 interface MaterialOption {
   name: string;
@@ -33,40 +34,20 @@ export const BrownGreenCalculator: React.FC = () => {
   const greenObj = GREEN_MATERIALS.find((g) => g.name === selectedGreen) || GREEN_MATERIALS[0];
   const brownObj = BROWN_MATERIALS.find((b) => b.name === selectedBrown) || BROWN_MATERIALS[0];
 
-  // Estimated weighted C:N computation
-  const totalVolume = greenVolume + brownVolume;
-  const estimatedCN = totalVolume > 0
-    ? Math.round((greenVolume * greenObj.cnRatio + brownVolume * brownObj.cnRatio) / totalVolume)
-    : 30;
-
-  const volumeRatio = greenVolume > 0 ? (brownVolume / greenVolume).toFixed(1) : '0';
-
-  // Analysis
-  let status: 'balanced' | 'needs-browns' | 'too-carbon';
-  let statusTitle = '';
-  let statusAdvice = '';
-
-  if (estimatedCN < 25) {
-    status = 'needs-browns';
-    statusTitle = 'High Nitrogen Alert (Too Many Greens)';
-    const recommendedBrowns = Math.max(1, Math.round(((30 - greenObj.cnRatio) * greenVolume) / (brownObj.cnRatio - 30)));
-    statusAdvice = `Your mixture has an estimated C:N of ~${estimatedCN}:1. This can cause anaerobic rotting, rotten egg odor, and excess moisture. Add approximately ${recommendedBrowns} more bucket(s) of ${brownObj.name} to bring the ratio closer to the 30:1 sweet spot.`;
-  } else if (estimatedCN > 45) {
-    status = 'too-carbon';
-    statusTitle = 'High Carbon Alert (Too Many Browns)';
-    statusAdvice = `Your mixture has an estimated C:N of ~${estimatedCN}:1. While this will not smell, it will decompose very slowly and will not heat up. Add 1–2 more buckets of kitchen scraps or fresh grass to accelerate microbial activity.`;
-  } else {
-    status = 'balanced';
-    statusTitle = 'Optimally Balanced Compost Recipe!';
-    statusAdvice = `Estimated C:N is ~${estimatedCN}:1 (Ideal range: 25:1 to 35:1). This mixture provides sufficient nitrogen to feed thermophilic bacteria and enough carbon aeration to prevent foul odors.`;
-  }
+  const assessment = assessBrownGreen({
+    greenVolume,
+    brownVolume,
+    greenName: greenObj.name,
+    brownName: brownObj.name,
+  });
+  const { status, ratioLabel, statusTitle, statusAdvice } = assessment;
 
   const handleCopy = () => {
     const text = `WasteBloom Brown-to-Green Compost Balance:
-- Greens: ${greenVolume} buckets of ${greenObj.name} (C:N ~${greenObj.cnRatio}:1)
-- Browns: ${brownVolume} buckets of ${brownObj.name} (C:N ~${brownObj.cnRatio}:1)
-- Volume Ratio: ${volumeRatio}:1 (Browns to Greens)
-- Estimated C:N Ratio: ~${estimatedCN}:1
+- Greens: ${greenVolume} buckets of ${greenObj.name} (reference C:N ~${greenObj.cnRatio}:1)
+- Browns: ${brownVolume} buckets of ${brownObj.name} (reference C:N ~${brownObj.cnRatio}:1)
+- Volume Ratio: ${ratioLabel} (Browns to Greens)
+- Recommended band: ${RECOMMENDED_BROWNS_MIN}:1 to ${RECOMMENDED_BROWNS_MAX}:1 browns to greens by volume
 - Assessment: ${statusTitle}
 - Recommendation: ${statusAdvice}`;
     navigator.clipboard.writeText(text);
@@ -100,7 +81,7 @@ export const BrownGreenCalculator: React.FC = () => {
             <span className="px-3 py-1 bg-[#387A53] text-white text-xs font-bold rounded-lg uppercase tracking-wider">
               Green Materials (Nitrogen)
             </span>
-            <span className="text-xs font-bold text-[#387A53]">C:N ~{greenObj.cnRatio}:1</span>
+            <span className="text-xs font-bold text-[#387A53]">Ref. C:N ~{greenObj.cnRatio}:1</span>
           </div>
 
           <label className="block text-xs font-bold text-[#183D32] mb-1">Select Green Ingredient</label>
@@ -111,7 +92,7 @@ export const BrownGreenCalculator: React.FC = () => {
           >
             {GREEN_MATERIALS.map((g) => (
               <option key={g.name} value={g.name}>
-                {g.name} (C:N ~{g.cnRatio}:1)
+                {g.name} (reference C:N ~{g.cnRatio}:1)
               </option>
             ))}
           </select>
@@ -138,7 +119,7 @@ export const BrownGreenCalculator: React.FC = () => {
             <span className="px-3 py-1 bg-[#8A6346] text-white text-xs font-bold rounded-lg uppercase tracking-wider">
               Brown Materials (Carbon)
             </span>
-            <span className="text-xs font-bold text-[#8A6346]">C:N ~{brownObj.cnRatio}:1</span>
+            <span className="text-xs font-bold text-[#8A6346]">Ref. C:N ~{brownObj.cnRatio}:1</span>
           </div>
 
           <label className="block text-xs font-bold text-[#183D32] mb-1">Select Brown Ingredient</label>
@@ -149,7 +130,7 @@ export const BrownGreenCalculator: React.FC = () => {
           >
             {BROWN_MATERIALS.map((b) => (
               <option key={b.name} value={b.name}>
-                {b.name} (C:N ~{b.cnRatio}:1)
+                {b.name} (reference C:N ~{b.cnRatio}:1)
               </option>
             ))}
           </select>
@@ -212,23 +193,23 @@ export const BrownGreenCalculator: React.FC = () => {
           <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
             <span className="text-xs text-[#E3EDE1]">Volume Balance Ratio</span>
             <div className="text-2xl font-extrabold text-white mt-1">
-              {volumeRatio} : 1
+              {ratioLabel}
             </div>
-            <span className="text-xs text-[#E3EDE1]">Browns to Greens</span>
+            <span className="text-xs text-[#E3EDE1]">Browns to Greens, by volume</span>
           </div>
 
           <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-            <span className="text-xs text-[#E3EDE1]">Estimated Chemical C:N</span>
+            <span className="text-xs text-[#E3EDE1]">Recommended Band</span>
             <div className="text-2xl font-extrabold text-[#B6D96A] mt-1">
-              ~{estimatedCN} : 1
+              {RECOMMENDED_BROWNS_MIN} : 1 – {RECOMMENDED_BROWNS_MAX} : 1
             </div>
-            <span className="text-xs text-[#E3EDE1]">Target Range: 25:1 to 35:1</span>
+            <span className="text-xs text-[#E3EDE1]">Browns to Greens, by volume</span>
           </div>
 
           <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
             <span className="text-xs text-[#E3EDE1]">Pile Status</span>
             <div className={`text-lg font-bold mt-1.5 ${status === 'balanced' ? 'text-[#B6D96A]' : 'text-amber-300'}`}>
-              {status === 'balanced' ? 'Sweet & Active' : status === 'needs-browns' ? 'Risk of Odor' : 'Slow Decomposition'}
+              {status === 'balanced' ? 'Sweet & Active' : status === 'needs-browns' ? 'Add Browns' : 'Slow Breakdown'}
             </div>
           </div>
         </div>
@@ -241,9 +222,10 @@ export const BrownGreenCalculator: React.FC = () => {
       </div>
 
       <div className="border-t border-[#E3EDE1] pt-6 text-xs text-[#78847D] space-y-2">
-        <h4 className="font-bold text-[#183D32] text-sm">Horticultural Science Disclaimer:</h4>
-        <p>• <strong>Moisture and Bulk Density:</strong> A 5-gallon bucket of damp kitchen scraps weighs much more than a 5-gallon bucket of dry fluffy leaves. This calculator incorporates volumetric estimation combined with typical agricultural bulk densities to provide a safe home recipe.</p>
-        <p>• <strong>Golden Rule of Thumb:</strong> When in doubt, always add more dry brown carbon. A pile with too much carbon decomposed slowly with zero odor; a pile with too much nitrogen rots anaerobically and produces foul ammonia and sulfur smells.</p>
+        <h4 className="font-bold text-[#183D32] text-sm">How This Estimate Works &amp; Sources:</h4>
+        <p>• <strong>Volume-ratio method:</strong> This tool compares your inputs by volume (browns per 1 green) and checks them against the 2:1 to 4:1 band recommended by University of California Agriculture and Natural Resources, Cornell University, Boston Recreation &amp; Conservation and Ask Extension. It does not compute a chemical C:N ratio for your pile — moisture, density and particle size make that number unreliable from bucket counts alone.</p>
+        <p>• <strong>Reference C:N values only:</strong> The per-material C:N numbers shown in the selectors are published reference values for those materials, included for context, not inputs to a pile-wide calculation.</p>
+        <p>• <strong>Golden Rule of Thumb:</strong> When in doubt, add more dry brown carbon. A pile with too much carbon breaks down slowly with little odor; a pile with too much nitrogen rots anaerobically and produces foul ammonia and sulfur smells.</p>
       </div>
     </div>
   );
