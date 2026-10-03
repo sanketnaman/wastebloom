@@ -1,0 +1,6 @@
+{
+  "name": "WasteBloom",
+  "description": "Educational gardening and organic waste upcycling platform with interactive composting tools, DIY projects, and AI waste identification.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

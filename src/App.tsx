@@ -1,0 +1,168 @@
+import React, { useState, useEffect } from 'react';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { SearchModal } from './components/SearchModal';
+import { HomePage } from './pages/HomePage';
+import { WasteToGardenPage } from './pages/WasteToGardenPage';
+import { WasteArticlePage } from './pages/WasteArticlePage';
+import { CompostingPage } from './pages/CompostingPage';
+import { CompostingArticlePage } from './pages/CompostingArticlePage';
+import { DIYProjectsPage } from './pages/DIYProjectsPage';
+import { DIYProjectArticlePage } from './pages/DIYProjectArticlePage';
+import { GardeningGuidesPage } from './pages/GardeningGuidesPage';
+import { GardeningArticlePage } from './pages/GardeningArticlePage';
+import { ToolsIndexPage } from './pages/ToolsIndexPage';
+import { ToolDetailPage } from './pages/ToolDetailPage';
+import { ScannerPage } from './pages/ScannerPage';
+import { LegalPage } from './pages/LegalPage';
+
+export function App() {
+  const [currentPath, setCurrentPath] = useState<string>(() => {
+    return window.location.pathname || '/';
+  });
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname || '/');
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Navigate handler that updates URL bar and scrolls to top smoothly
+  const handleNavigate = (path: string) => {
+    if (path === currentPath) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    window.history.pushState({}, '', path);
+    setCurrentPath(path);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Route dispatcher
+  const renderContent = () => {
+    // 1. Homepage
+    if (currentPath === '/' || currentPath === '') {
+      return <HomePage onNavigate={handleNavigate} />;
+    }
+
+    // 2. Waste to Garden
+    if (currentPath === '/waste-to-garden') {
+      return <WasteToGardenPage onNavigate={handleNavigate} />;
+    }
+    if (currentPath.startsWith('/waste-to-garden/')) {
+      const slug = currentPath.replace('/waste-to-garden/', '');
+      return <WasteArticlePage slug={slug} onNavigate={handleNavigate} />;
+    }
+
+    // 3. Composting Knowledge Center
+    if (currentPath === '/composting') {
+      return <CompostingPage onNavigate={handleNavigate} />;
+    }
+    if (currentPath.startsWith('/composting/')) {
+      const slug = currentPath.replace('/composting/', '');
+      return <CompostingArticlePage slug={slug} onNavigate={handleNavigate} />;
+    }
+
+    // 4. DIY Garden Projects
+    if (currentPath === '/diy-garden-projects') {
+      return <DIYProjectsPage onNavigate={handleNavigate} />;
+    }
+    if (currentPath.startsWith('/diy-garden-projects/')) {
+      const slug = currentPath.replace('/diy-garden-projects/', '');
+      return <DIYProjectArticlePage slug={slug} onNavigate={handleNavigate} />;
+    }
+
+    // 5. Gardening Guides
+    if (currentPath === '/gardening-guides') {
+      return <GardeningGuidesPage onNavigate={handleNavigate} />;
+    }
+    if (currentPath.startsWith('/gardening-guides/')) {
+      const slug = currentPath.replace('/gardening-guides/', '');
+      return <GardeningArticlePage slug={slug} onNavigate={handleNavigate} />;
+    }
+
+    // 6. Tools & Calculators
+    if (currentPath === '/tools') {
+      return <ToolsIndexPage onNavigate={handleNavigate} />;
+    }
+    if (currentPath.startsWith('/tools/')) {
+      const slug = currentPath.replace('/tools/', '');
+      return <ToolDetailPage toolSlug={slug} onNavigate={handleNavigate} />;
+    }
+
+    // 7. Waste Scanner
+    if (currentPath === '/waste-scanner') {
+      return <ScannerPage onNavigate={handleNavigate} />;
+    }
+
+    // 8. Legal and Company pages
+    const legalPages: Array<
+      | 'about'
+      | 'contact'
+      | 'privacy-policy'
+      | 'terms-and-conditions'
+      | 'disclaimer'
+      | 'cookie-policy'
+      | 'advertising-policy'
+      | 'editorial-policy'
+    > = [
+      'about',
+      'contact',
+      'privacy-policy',
+      'terms-and-conditions',
+      'disclaimer',
+      'cookie-policy',
+      'advertising-policy',
+      'editorial-policy',
+    ];
+
+    const trimmedPath = currentPath.replace(/^\//, '') as any;
+    if (legalPages.includes(trimmedPath)) {
+      return <LegalPage pageType={trimmedPath} onNavigate={handleNavigate} />;
+    }
+
+    // Fallback: 404
+    return (
+      <div className="max-w-xl mx-auto px-4 py-24 text-center">
+        <h1 className="text-4xl font-extrabold text-[#183D32]">404 – Page Not Found</h1>
+        <p className="text-sm text-[#78847D] mt-3">
+          The gardening guide or tool you are looking for has been relocated or does not exist.
+        </p>
+        <button
+          onClick={() => handleNavigate('/')}
+          className="mt-6 px-6 py-3 rounded-2xl bg-[#183D32] text-white text-xs font-bold shadow-sm"
+        >
+          Return to WasteBloom Homepage
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F8F6EE] text-[#26332D]">
+      <Header
+        currentPath={currentPath}
+        onNavigate={handleNavigate}
+        onOpenSearch={() => setIsSearchOpen(true)}
+      />
+
+      <main className="flex-1">
+        {renderContent()}
+      </main>
+
+      <Footer onNavigate={handleNavigate} />
+
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        onNavigate={handleNavigate}
+      />
+    </div>
+  );
+}
+
+export default App;

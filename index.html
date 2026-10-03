@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var currentFetch = window.fetch;
+          var descriptor = {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(val) {
+              currentFetch = val;
+            },
+            configurable: true,
+            enumerable: true
+          };
+          try {
+            Object.defineProperty(window, 'fetch', descriptor);
+          } catch (_) {}
+          try {
+            if (typeof Window !== 'undefined' && Window.prototype) {
+              Object.defineProperty(Window.prototype, 'fetch', descriptor);
+            }
+          } catch (_) {}
+        } catch (_) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WasteBloom – Turn Everyday Waste Into Something Beautiful</title>
+    <meta name="description" content="Discover how everyday kitchen scraps and household waste can become valuable resources for your garden. Explore composting ideas, DIY projects, and AI waste identification." />
+    <meta name="keywords" content="waste to garden, composting, kitchen scraps, banana peels for plants, eggshells for plants, coffee grounds compost, organic gardening, DIY planters" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="WasteBloom – Turn Everyday Waste Into Something Beautiful" />
+    <meta property="og:description" content="Discover how everyday kitchen scraps and household waste can become valuable resources for your garden. Explore composting ideas, DIY projects, and AI waste identification." />
+    <meta property="og:site_name" content="WasteBloom" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WasteBloom – Turn Everyday Waste Into Something Beautiful" />
+    <meta name="twitter:description" content="Discover how everyday kitchen scraps and household waste can become valuable resources for your garden. Explore composting ideas, DIY projects, and AI waste identification." />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23183D32'/%3E%3Cpath d='M16 6C16 6 11 12 11 17C11 19.7614 13.2386 22 16 22C18.7614 22 21 19.7614 21 17C21 12 16 6 16 6Z' fill='%23B6D96A'/%3E%3Cpath d='M16 11V22' stroke='%23183D32' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M16 15L19 13' stroke='%23183D32' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M16 18L13 16' stroke='%23183D32' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M9 25C13 27 19 27 23 25' stroke='%23387A53' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://wastebloom.org/#organization",
+          "name": "WasteBloom",
+          "url": "https://wastebloom.org",
+          "logo": "https://wastebloom.org/logo.png",
+          "description": "Educational platform dedicated to turning everyday household waste into valuable gardening and composting resources."
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://wastebloom.org/#website",
+          "url": "https://wastebloom.org",
+          "name": "WasteBloom",
+          "publisher": { "@id": "https://wastebloom.org/#organization" }
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body class="bg-[#F8F6EE] text-[#26332D] antialiased selection:bg-[#B6D96A]/40 selection:text-[#183D32]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
