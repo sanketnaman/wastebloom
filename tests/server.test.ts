@@ -308,3 +308,36 @@ describe('SEO endpoints', () => {
     }
   });
 });
+
+describe('contact and newsletter honesty', () => {
+  it('has no contact endpoint - no fake backend was created', async () => {
+    const { server, base } = await startApp({ config: baseConfig(), aiClient: null });
+    try {
+      const response = await fetch(`${base}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: 'reader@example.com', message: 'Hello' }),
+      });
+      expect(response.status).toBe(404);
+    } finally {
+      server.close();
+    }
+  });
+
+  it('unconfigured newsletter explicitly states no address was stored', async () => {
+    const { server, base } = await startApp({ config: baseConfig({ newsletterWebhookUrl: null }), aiClient: null });
+    try {
+      const response = await fetch(`${base}/api/newsletter/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: 'gardener@example.com' }),
+      });
+      const json = await response.json();
+      expect(json.configured).toBe(false);
+      expect(json.subscribed).toBe(false);
+      expect(json.message).toMatch(/No address was stored/i);
+    } finally {
+      server.close();
+    }
+  });
+});

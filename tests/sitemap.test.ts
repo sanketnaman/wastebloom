@@ -1,6 +1,7 @@
 // @vitest-environment node
 import { describe, it, expect } from 'vitest';
 import { getSitemapEntries, buildSitemapXml, DEFAULT_LASTMOD } from '../src/data/sitemap';
+import { LEGAL_ROUTES } from '../src/data/legalRoutes';
 
 describe('sitemap', () => {
   const entries = getSitemapEntries();
@@ -36,6 +37,14 @@ describe('sitemap', () => {
 
   it('has no duplicate routes', () => {
     expect(new Set(paths).size).toBe(paths.length);
+  });
+
+  it('includes each of the eight legal routes exactly once', () => {
+    for (const route of LEGAL_ROUTES) {
+      expect(paths, `sitemap missing ${route.path}`).toContain(route.path);
+    }
+    const legalHits = paths.filter((p) => LEGAL_ROUTES.some((r) => r.path === p));
+    expect(legalHits.length).toBe(LEGAL_ROUTES.length);
   });
 
   it('builds valid XML pointing at the canonical site origin', () => {

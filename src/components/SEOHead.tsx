@@ -10,6 +10,7 @@ interface SEOHeadProps {
   image?: string;
   publishedTime?: string;
   modifiedTime?: string;
+  robots?: string;
   schema?: Record<string, any> | Array<Record<string, any>>;
 }
 
@@ -41,13 +42,16 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   image,
   publishedTime,
   modifiedTime,
+  robots,
   schema,
 }) => {
   useEffect(() => {
-    const fullTitle = title.includes('WasteBloom') ? title : `${title} – WasteBloom`;
+    const fullTitle = title.includes('WasteBloom') ? title : `${title} - WasteBloom`;
     document.title = fullTitle;
 
     upsertMeta('name', 'description', description);
+    if (robots) upsertMeta('name', 'robots', robots);
+    else document.querySelector('meta[name="robots"]')?.remove();
 
     const canonical = canonicalPath ? absoluteUrl(canonicalPath) : null;
     const ogImage = image ? absoluteUrl(image) : null;
@@ -78,7 +82,7 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
     } else if (jsonLdScript) {
       jsonLdScript.remove();
     }
-  }, [title, description, ogType, canonicalPath, image, publishedTime, modifiedTime, schema]);
+  }, [title, description, ogType, canonicalPath, image, publishedTime, modifiedTime, robots, schema]);
 
   return null;
 };

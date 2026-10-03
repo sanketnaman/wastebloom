@@ -383,8 +383,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="bg-[#F8F6EC] text-[#1F2923] space-y-16 sm:space-y-24 pb-16">
       <SEOHead
-        title="WasteBloom – Turn Everyday Waste Into Something Beautiful"
+        title="WasteBloom - Turn Everyday Waste Into Something Beautiful"
         description="Discover how everyday kitchen scraps and household waste can become valuable resources for your garden. Explore composting ideas, DIY projects, and AI waste identification."
+        canonicalPath="/"
+        robots="index,follow"
       />
 
       {/* =========================================================================

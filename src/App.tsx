@@ -15,6 +15,8 @@ import { ToolsIndexPage } from './pages/ToolsIndexPage';
 import { ToolDetailPage } from './pages/ToolDetailPage';
 import { ScannerPage } from './pages/ScannerPage';
 import { LegalPage } from './pages/LegalPage';
+import { LEGAL_PAGE_TYPES } from './data/legalRoutes';
+import type { LegalPageType } from './data/legalRoutes';
 
 export function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
@@ -100,29 +102,9 @@ export function App() {
     }
 
     // 8. Legal and Company pages
-    const legalPages: Array<
-      | 'about'
-      | 'contact'
-      | 'privacy-policy'
-      | 'terms-and-conditions'
-      | 'disclaimer'
-      | 'cookie-policy'
-      | 'advertising-policy'
-      | 'editorial-policy'
-    > = [
-      'about',
-      'contact',
-      'privacy-policy',
-      'terms-and-conditions',
-      'disclaimer',
-      'cookie-policy',
-      'advertising-policy',
-      'editorial-policy',
-    ];
-
-    const trimmedPath = currentPath.replace(/^\//, '') as any;
-    if (legalPages.includes(trimmedPath)) {
-      return <LegalPage pageType={trimmedPath} onNavigate={handleNavigate} />;
+    const trimmedPath = currentPath.replace(/^\//, '');
+    if ((LEGAL_PAGE_TYPES as string[]).includes(trimmedPath)) {
+      return <LegalPage pageType={trimmedPath as LegalPageType} onNavigate={handleNavigate} />;
     }
 
     // Fallback: 404

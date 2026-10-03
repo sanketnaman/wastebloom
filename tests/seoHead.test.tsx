@@ -16,10 +16,19 @@ afterEach(() => {
 describe('SEOHead', () => {
   it('sets the document title with the site suffix', () => {
     render(<SEOHead title="Coffee Grounds for Plants" description="Learn what research says." />);
-    expect(document.title).toBe('Coffee Grounds for Plants – WasteBloom');
+    expect(document.title).toBe('Coffee Grounds for Plants - WasteBloom');
     expect(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(
       'Learn what research says.'
     );
+  });
+
+  it('writes and removes the robots directive', () => {
+    const { rerender } = render(
+      <SEOHead title="Privacy Policy" description="How data is handled." robots="index,follow" />
+    );
+    expect(document.querySelector('meta[name="robots"]')?.getAttribute('content')).toBe('index,follow');
+    rerender(<SEOHead title="Coffee Grounds for Plants" description="desc" />);
+    expect(document.querySelector('meta[name="robots"]')).toBeNull();
   });
 
   it('writes an absolute canonical URL', () => {
