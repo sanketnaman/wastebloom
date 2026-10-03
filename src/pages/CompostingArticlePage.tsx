@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { CheckCircle2, ChevronDown, ChevronUp, Printer, ArrowRight, ShieldCheck, Sparkles, Sprout } from 'lucide-react';
+import { CheckCircle2, ChevronDown, ChevronUp, Printer, ArrowRight, ShieldCheck, ShieldAlert, Sparkles, Sprout } from 'lucide-react';
 import { compostingGuides } from '../data/compostingGuides';
+import { resolveReference } from '../data/relatedGuides';
 import { SEOHead } from '../components/SEOHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
@@ -35,6 +36,8 @@ export const CompostingArticlePage: React.FC<CompostingArticlePageProps> = ({ sl
         title={guide.title}
         description={guide.excerpt}
         ogType="article"
+        canonicalPath={`/composting/${guide.slug}`}
+        image={guide.featuredImage}
       />
 
       <Breadcrumbs
@@ -60,8 +63,22 @@ export const CompostingArticlePage: React.FC<CompostingArticlePageProps> = ({ sl
 
         <div className="mt-4 pt-4 border-t border-[#CBD5CD]/40 flex items-center justify-between text-xs text-[#78847D]">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#387A53]" />
-            <span>Fact-Checked by WasteBloom Soil Sciences</span>
+            {guide.reviewStatus === 'needs-human-review' ? (
+              <>
+                <ShieldAlert className="w-4 h-4 text-amber-600" />
+                <span>Draft — pending review by the WasteBloom editorial team</span>
+              </>
+            ) : guide.reviewStatus === 'human-reviewed' ? (
+              <>
+                <ShieldCheck className="w-4 h-4 text-[#387A53]" />
+                <span>Fact-Checked by WasteBloom Soil Sciences</span>
+              </>
+            ) : (
+              <>
+                <ShieldCheck className="w-4 h-4 text-[#78847D]" />
+                <span>An editorial guide from WasteBloom</span>
+              </>
+            )}
           </div>
           <button onClick={() => window.print()} className="flex items-center gap-1 hover:text-[#183D32]">
             <Printer className="w-3.5 h-3.5" /> Print
@@ -145,6 +162,34 @@ export const CompostingArticlePage: React.FC<CompostingArticlePageProps> = ({ sl
                 </div>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* References */}
+        {guide.references && guide.references.length > 0 && (
+          <section className="p-6 rounded-3xl bg-[#F8F6EE] border border-[#CBD5CD] text-xs text-[#78847D]">
+            <h3 className="font-bold text-[#183D32] text-sm mb-2">Sources &amp; Further Reading:</h3>
+            <ul className="space-y-1.5 list-disc list-inside">
+              {guide.references.map((ref, i) => {
+                const resolved = resolveReference(ref);
+                return (
+                  <li key={i}>
+                    {resolved.url ? (
+                      <a
+                        href={resolved.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#387A53] hover:underline"
+                      >
+                        {resolved.title}
+                      </a>
+                    ) : (
+                      resolved.title
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </section>
         )}
 

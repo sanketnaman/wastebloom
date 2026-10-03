@@ -43,7 +43,7 @@ export const LegalPage: React.FC<LegalPageProps> = ({ pageType, onNavigate }) =>
                 Too much gardening advice online consists of unverified gardening folklore and viral social media "hacks" that actually damage soil biology—such as dumping unbrewed acidic coffee grounds onto young seedlings, spraying fermenting banana peel sugar water, or burying whole raw eggshells that sit intact for years.
               </p>
               <p>
-                WasteBloom bridges the gap between academic soil science and practical everyday home gardening. We provide fact-checked, tested methods for transforming kitchen scraps, corrugated cardboard, and yard clippings into thriving living soil.
+                WasteBloom bridges the gap between academic soil science and practical everyday home gardening. We publish source-linked methods for transforming kitchen scraps, corrugated cardboard, and yard clippings into thriving living soil, citing the university extensions behind them.
               </p>
               <h3 className="text-lg font-bold text-[#183D32]">Our Core Pillars</h3>
               <ul className="list-disc list-inside space-y-2">
@@ -121,19 +121,22 @@ export const LegalPage: React.FC<LegalPageProps> = ({ pageType, onNavigate }) =>
 
       case 'editorial-policy':
         return {
-          title: 'Editorial & Fact-Checking Policy',
-          subtitle: 'How we research, verify, and maintain our gardening knowledge.',
+          title: 'Editorial Policy',
+          subtitle: 'How we research, cite, and maintain our gardening knowledge.',
           content: (
             <div className="space-y-4 text-sm text-[#26332D] leading-relaxed">
               <p>
-                At WasteBloom, our primary commitment is to scientific accuracy. We recognize that misapplying organic materials—such as piling high-nitrogen greens against tree trunks or applying raw eggshells with residual bacteria to salad greens—can cause plant disease or food safety hazards.
+                At WasteBloom, our primary commitment is accuracy. We recognize that misapplying organic materials—such as piling high-nitrogen greens against tree trunks or applying raw eggshells with residual bacteria to salad greens—can cause plant disease or food safety hazards.
+              </p>
+              <p>
+                Our guides are written with citations to cooperative university extensions and other primary sources, and every guide currently carries a visible status label: drafts are marked <em>pending review</em> until a human editor has verified them against those sources. We do not present unreviewed drafts as fact-checked.
               </p>
               <h3 className="text-base font-bold text-[#183D32]">Our 4 Editorial Standards:</h3>
               <ol className="list-decimal list-inside space-y-2">
-                <li><strong>University Extension Grounding:</strong> Every claim regarding nutrient bioavailability (e.g. potassium release in banana peels or nitrogen in coffee grounds) is cross-referenced against agricultural cooperative extensions (Cornell, UC Davis, WSU, OSU, RHS).</li>
-                <li><strong>Myth Busting:</strong> We explicitly distinguish between laboratory-verified biological facts and viral internet garden myths.</li>
-                <li><strong>No AI Hallucinations in Core Guides:</strong> All published reference manuals and deterministic calculators are curated and reviewed by human editorial staff.</li>
-                <li><strong>Transparent Corrections:</strong> When peer-reviewed horticultural research introduces new findings, our articles are updated with revision dates.</li>
+                <li><strong>University Extension Grounding:</strong> Nutrient and usage claims (e.g. potassium in banana peels or nitrogen in coffee grounds) are traced to agricultural cooperative extensions, with sources linked on each article.</li>
+                <li><strong>Myth Busting:</strong> We distinguish between extension-supported findings and viral internet garden myths, and say plainly when evidence is weak.</li>
+                <li><strong>No AI-Generated Copy in Core Guides:</strong> Guides are written and edited by people; our image scanner uses deterministic sample data when no AI model is configured, and says so in the interface.</li>
+                <li><strong>Transparent Corrections:</strong> When a guide is updated, its revision date is shown, and readers can report corrections through our contact page.</li>
               </ol>
             </div>
           ),

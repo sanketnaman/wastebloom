@@ -158,8 +158,6 @@ export const WasteArticlePage: React.FC<WasteArticlePageProps> = ({ slug, onNavi
     );
   }
 
-  const needsReview = guide.reviewStatus === 'needs-human-review';
-
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10">
       <SEOHead
@@ -203,15 +201,20 @@ export const WasteArticlePage: React.FC<WasteArticlePageProps> = ({ slug, onNavi
 
         <div className="mt-4 pt-4 border-t border-[#CBD5CD]/40 flex flex-wrap items-center justify-between gap-4 text-xs text-[#78847D]">
           <div className="flex items-center gap-2">
-            {needsReview ? (
+            {guide.reviewStatus === 'needs-human-review' ? (
               <>
                 <ShieldAlert className="w-4 h-4 text-amber-600" />
                 <span>Draft — pending review by the {SITE_NAME} editorial team</span>
               </>
-            ) : (
+            ) : guide.reviewStatus === 'human-reviewed' ? (
               <>
                 <ShieldCheck className="w-4 h-4 text-[#387A53]" />
                 <span>Fact-Checked &amp; Reviewed by {SITE_NAME} Soil Sciences</span>
+              </>
+            ) : (
+              <>
+                <ShieldCheck className="w-4 h-4 text-[#78847D]" />
+                <span>An editorial guide from {SITE_NAME}</span>
               </>
             )}
           </div>

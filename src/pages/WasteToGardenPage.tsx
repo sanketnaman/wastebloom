@@ -99,7 +99,7 @@ export const WasteToGardenPage: React.FC<WasteToGardenPageProps> = ({ onNavigate
               </div>
 
               <div className="pt-4 mt-6 border-t border-[#E3EDE1] flex items-center justify-between text-xs font-bold text-[#387A53]">
-                <span>Read Fact-Checked Guide</span>
+                <span>Read Guide</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </div>
             </div>

@@ -252,7 +252,7 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
       } else {
         // AI is not configured on this server — say so instead of inventing a result.
         setAnalysisError(
-          'AI image analysis is not configured on this server, so your photo was not analyzed. Try a sample item above for a curated demonstration, or browse our fact-checked guides.'
+          'AI image analysis is not configured on this server, so your photo was not analyzed. Try a sample item above for a curated demonstration, or browse our guides.'
         );
       }
     } catch {
@@ -301,7 +301,7 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
           <Info className="w-5 h-5 text-[#387A53] shrink-0 mt-0.5" />
           <div className="text-xs text-[#26332D]">
             <strong className="block text-sm font-bold text-[#183D32] mb-0.5">AI image analysis is not configured on this server</strong>
-            Uploaded photos will not be analyzed here. The quick-select sample items below show curated demonstration results, and all of our fact-checked guides and calculators work fully.
+            Uploaded photos will not be analyzed here. The quick-select sample items below show curated demonstration results, and all of our guides and calculators work fully.
           </div>
         </div>
       )}

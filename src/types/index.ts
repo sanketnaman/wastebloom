@@ -89,6 +89,7 @@ export interface CompostingGuideItem {
   featuredImage: string;
   imageAlt: string;
   introduction: string;
+  reviewStatus?: ReviewStatus;
   keyTakeaways: string[];
   sections: {
     title: string;
@@ -99,6 +100,7 @@ export interface CompostingGuideItem {
     question: string;
     answer: string;
   }[];
+  references?: Array<string | GuideReference>;
   relatedGuideSlugs: string[];
 }
 
@@ -136,6 +138,9 @@ export interface GardeningGuideItem {
   readingTime: string;
   category: 'Soil Health' | 'Organic Pest Control' | 'Sustainable Gardening';
   featuredImage: string;
+  imageAlt: string;
+  introduction?: string;
+  reviewStatus?: ReviewStatus;
   sections: {
     title: string;
     content: string;
@@ -144,6 +149,7 @@ export interface GardeningGuideItem {
     question: string;
     answer: string;
   }[];
+  references?: Array<string | GuideReference>;
   relatedGuideSlugs: string[];
 }
 

@@ -672,7 +672,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       onClick={() => onNavigate('/waste-to-garden')}
                       className="text-xs font-bold text-[#367B53] hover:underline flex items-center gap-1"
                     >
-                      <span>Read comprehensive fact-checked guide</span>
+                      <span>Read comprehensive guide</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>

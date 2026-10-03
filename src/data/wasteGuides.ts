@@ -7,7 +7,7 @@ export const wasteGuides: WasteGuideItem[] = [
     title: 'Can You Use Banana Peels for Plants? Benefits, Soil vs Compost, and Safe Methods',
     shortTitle: 'Banana Peels for Plants',
     scientificName: 'Musa acuminata',
-    excerpt: 'Banana peels are rich in potassium, but simply soaking them in water or burying whole peels can attract pests and mold. Learn the science-backed way to compost and apply them safely.',
+    excerpt: 'Banana peels add potassium and other nutrients as they compost, but soaking them in water or burying whole peels rarely does what garden blogs promise. Learn what works and what does not.',
     readingTime: '6 min read',
     category: 'Fruit & Vegetable',
     suitability: 'Suitable with preparation',
@@ -15,15 +15,23 @@ export const wasteGuides: WasteGuideItem[] = [
     type: 'Green (Nitrogen)',
     featuredImage: 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Fresh banana peels on wooden cutting board ready for kitchen composting',
-    quickAnswer: 'Yes, banana peels are excellent for your garden—primarily when composted or thoroughly dried and powdered. Raw peels do not provide immediate plant nutrients and burying them whole can attract gnats, fruit flies, and rodents. "Banana peel tea" (soaking peels in water) has virtually zero bioavailable potassium and risks breeding harmful bacteria.',
+    metaTitle: 'Banana Peels for Plants: What Works, What Doesn\u2019t, and How to Compost Them',
+    metaDescription: 'Banana peels add potassium and other nutrients as they compost, but peel "tea" and buried whole peels rarely do what garden blogs promise. What to do instead.',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      'Banana peels show up in almost every list of kitchen scraps you can use in the garden, usually alongside a claim that they are a free, potassium-rich fertilizer. The truth is more ordinary: peels are a decent compost ingredient, a mediocre direct amendment, and a poor liquid feed.',
+      'This guide covers the three common methods \u2014 composting, trenching, and peel powder \u2014 with what university extension sources actually say, so you can use your peels without disappointing your tomatoes.'
+    ],
+    featuredImageCaption: 'Chopped peels compost best; whole peels turn into slimy pockets.',
+    quickAnswer: 'Yes, banana peels are useful for the garden \u2014 primarily when composted, or dried and ground into a meal. Raw peels do not feed plants quickly, and burying them whole attracts gnats, fruit flies, and rodents. "Banana peel tea" does leach some potassium into water, but extension sources say there is no controlled data that it works as a fertilizer, and a week-old anaerobic brew can smell and grow mould. Composting is the reliable route.',
     directSoilUsage: {
       allowed: false,
-      explanation: 'Burying raw, whole banana peels directly into houseplant pots or near vegetable roots is not recommended. As they ferment anaerobically underground, they rob nitrogen from the surrounding soil to break down, and the sweet sugars attract fungus gnats, ants, and mice. Dehydrate and grind them, or compost them first.'
+      explanation: 'Do not bury raw, whole banana peels directly against houseplant pots or vegetable roots. As they break down underground they can tie up nitrogen in the surrounding soil for weeks, and the sweet residue attracts fungus gnats, ants, and mice. Dehydrate and grind them, or compost them first.'
     },
     compostSuitability: {
       recommended: true,
       speed: 'Moderate (1-3 months)',
-      details: 'Banana peels break down rapidly in a warm, aerated compost pile. They add valuable potassium, calcium, magnesium, and trace minerals. Chop them into 1-inch pieces to speed up decomposition 3x.'
+      details: 'Banana peels break down steadily in a warm, aerated compost pile. They add potassium, calcium, magnesium, and trace minerals. Chop them into 1-inch pieces so they break down faster and do not form slimy pockets.'
     },
     preparationSteps: [
       'Remove all plastic produce stickers and adhesive labels.',
@@ -38,7 +46,7 @@ export const wasteGuides: WasteGuideItem[] = [
       },
       {
         title: 'Step 2: Trench Composting for Heavy Feeders',
-        description: 'For outdoor rose bushes or tomatoes, dig a trench 8-10 inches deep, bury chopped peels under at least 6 inches of soil, and allow 4-6 weeks before planting to prevent root burn.'
+        description: 'For outdoor rose bushes or tomatoes, dig a trench 8-10 inches deep, bury chopped peels under at least 6 inches of soil, and wait 4-6 weeks before planting there. Fresh peels tie up nitrogen while they break down (University of California Master Gardeners), so give them a head start rather than planting straight into them.'
       },
       {
         title: 'Step 3: Banana Peel Meal Top Dressing',
@@ -46,19 +54,19 @@ export const wasteGuides: WasteGuideItem[] = [
       }
     ],
     benefits: [
-      'High in potassium (~42% of ash weight), which aids flowering, fruiting, and cellular water regulation.',
-      'Supplies secondary macronutrients including calcium, magnesium, and sulfur.',
+      'Roughly 7 to 8 percent potassium by weight (Ask Extension), plus calcium and magnesium released as the peel breaks down.',
+      'A low-risk way to return kitchen waste to the soil: as organic matter it feeds compost microbes rather than delivering a concentrated dose of salts.',
       'Improves compost pile moisture retention and feeds beneficial aerobic bacteria.'
     ],
     limitations: [
-      'Low in nitrogen (only ~1.2%), so it cannot serve as a balanced complete fertilizer alone.',
+      'Low in nitrogen, so it cannot serve as a balanced complete fertilizer on its own.',
       'Fresh peels are over 80% water; nutrient density per pound of fresh material is relatively modest.',
-      'Slow to mineralize into plant-absorbable ionic potassium without microbial breakdown.'
+      'Nutrients stay locked in organic matter until microbes break the peel down, so there is no quick feeding effect.'
     ],
     mythsBusted: [
       {
         myth: 'Banana peel tea (soaking peels in a jar of water for a week) is an all-natural Miracle-Gro.',
-        reality: 'University laboratory tests show that water soaking extracts virtually negligible mineral potassium, while creating an anaerobic broth of fermenting sugars that breeds mold, fungus gnats, and pathogens.'
+        reality: 'University of California Master Gardeners report that soaking does leach some potassium into the water, but there is no controlled data showing peel tea is an effective fertilizer, and the anaerobic brew can smell and grow mould. Composting the peels is the supported route.'
       },
       {
         myth: 'Burying a whole banana peel under a tomato plant prevents blossom end rot.',
@@ -85,10 +93,11 @@ export const wasteGuides: WasteGuideItem[] = [
       }
     ],
     references: [
-      'University of Minnesota Extension: "Using Organic Fertilizers and Kitchen Scraps"',
-      'Oregon State University Extension Service: "The Truth About Banana Peel Tea in Home Gardens"',
-      'Journal of Plant Nutrition: "Mineral Composition and Nutrient Cycling of Agricultural Fruit Byproducts"'
+      { title: 'Ask Extension: Is it okay to put banana peels in the soil around rose bushes?', url: 'https://ask.extension.org/kb/faq.php?id=793043' },
+      { title: 'University of California Agriculture and Natural Resources: Garden Myths Busted', url: 'https://ucanr.edu/site/uc-marin-master-gardeners/garden-myths-busted' },
+      { title: 'University of California Agriculture and Natural Resources: Garden Myth Explained \u2014 Banana Peels', url: 'https://ucanr.edu/blog/under-solano-sun/article/garden-myth-explained' }
     ],
+    bottomLine: 'Compost banana peels (chopped, mixed with browns) or dry and grind them for a slow-release meal. Skip peel tea and whole-peel burial \u2014 both are unreliable, and buried peels can attract pests while tying up nitrogen. Next: learn how to [make compost at home](/composting/how-to-make-compost-at-home) or see our guide to [vegetable scraps for compost](/waste-to-garden/vegetable-scraps-for-compost).',
     relatedGuideSlugs: ['eggshells-for-plants', 'vegetable-scraps-for-compost', 'coffee-grounds-for-plants']
   },
   {
@@ -512,7 +521,7 @@ export const wasteGuides: WasteGuideItem[] = [
     title: 'Orange & Citrus Peels for Plants: Composting, Worms, and Pest Deterrence',
     shortTitle: 'Orange Peels for Plants',
     scientificName: 'Citrus sinensis byproduct',
-    excerpt: 'Can you compost citrus peels? Debunking the long-standing myth that orange and lemon peels ruin compost piles and kill all beneficial earthworms.',
+    excerpt: 'Can you compost citrus peels? Yes \u2014 chopped orange and lemon rind breaks down in a normal outdoor pile. The old claims about ruined compost and dead worms are overstated, but worm bins are a different story.',
     readingTime: '5 min read',
     category: 'Fruit & Vegetable',
     suitability: 'Suitable with preparation',
@@ -520,20 +529,28 @@ export const wasteGuides: WasteGuideItem[] = [
     type: 'Green (Nitrogen)',
     featuredImage: 'https://images.unsplash.com/photo-1547514701-42782101795e?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Bright fresh orange peels and citrus slices on a rustic wooden compost surface',
-    quickAnswer: 'Yes, citrus peels CAN be safely composted in standard home compost piles! The old myth that orange peels take 10 years to decompose or ruin compost piles is completely false for standard piles. The citrus oil (d-limonene) naturally evaporates and breaks down under heat and microbial activity. However, they should be limited in worm bins (vermicomposting), as concentrated d-limonene irritates earthworm skin.',
+    metaTitle: 'Orange and Citrus Peels for Compost and Plants: What\u2019s True',
+    metaDescription: 'Citrus peels can go in a backyard compost pile \u2014 chop them and mix with browns. What the extension sources say about acidity, worms, and DIY citrus sprays.',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      'Citrus gets a bad reputation in composting. Someone, somewhere, decided that orange peels take a decade to rot and that one lemon will kill a worm bin, and the claim has been repeated ever since.',
+      'The reality, according to extension sources, is simpler: citrus is fine in a normal outdoor pile, less helpful in a confined worm bin, and not the soil-acidifier either supporters or critics imagine. Here is how to handle it.'
+    ],
+    featuredImageCaption: 'Chop the rind; the waxy cuticle is what slows whole peels down.',
+    quickAnswer: 'Yes \u2014 citrus peels can be safely composted in a standard outdoor pile. The old claim that orange peels take years to decompose or ruin compost is overstated: chopped rind breaks down in a hot pile over a few weeks, and green mould appearing on the peels is a normal part of that process. The exception is worm bins \u2014 Oregon State University guidance notes that citrus (like onion scraps) may be toxic to worms in confined systems, so keep it out or add very small amounts.',
     directSoilUsage: {
       allowed: false,
-      explanation: 'Do not bury fresh citrus peels directly against garden plant roots. The concentrated citrus oils and acidic nature can shock tender roots until broken down.'
+      explanation: 'Do not bury fresh citrus peels against plant roots. Raw peels break down slowly, attract fruit flies while they decompose, and offer no benefit to plants in uncomposted form. Chop them and compost instead.'
     },
     compostSuitability: {
       recommended: true,
       speed: 'Moderate (1-3 months)',
-      details: 'Citrus peels compost thoroughly when chopped into small segments. In hot compost piles, thermophilic microbes break down citrus rind within 4 to 8 weeks without disrupting pH.'
+      details: 'Chopped rind breaks down in a hot pile within a few weeks; in a cool, unturned pile the waxy cuticle can take several months. Citrus does not meaningfully change the pH of a mixed pile \u2014 Ask Extension describes the effect on soil or compost acidity as negligible \u2014 so there is no need to avoid it for pH reasons.'
     },
     preparationSteps: [
       'Chop thick rinds into small pieces (about 1-inch squares) to break the protective waxy outer cuticle.',
       'Mix thoroughly with dry brown carbon materials (cardboard, dry leaves) to offset moisture.',
-      'Keep citrus to no more than 10-15% of your total compost mass.'
+      'Add citrus in moderation \u2014 scatter and mix it through the pile rather than dumping peels in one spot.'
     ],
     howToUseSteps: [
       {
@@ -541,32 +558,32 @@ export const wasteGuides: WasteGuideItem[] = [
         description: 'Scatter chopped citrus peels into the center of your compost bin where temperatures are highest, covering with dry shredded leaves.'
       },
       {
-        title: 'Step 2: DIY Natural Cat & Insect Deterrent Spray',
-        description: 'Simmer 2 cups of orange peels in 4 cups of water for 20 minutes. Strain, cool, and spray around garden borders to deter stray cats and soft-bodied aphids.'
+        title: 'Step 2: Citrus Peel Rinse (Traditional)',
+        description: 'Simmer 2 cups of orange peels in 4 cups of water for 20 minutes. Strain, cool, and use the cooled liquid to wipe down outdoor bins and surfaces. Gardeners also use it as a mild scent deterrent for cats \u2014 there is little controlled evidence it controls aphids, so do not rely on it for pest management.'
       },
       {
-        title: 'Step 3: Indoor Garbage Disposal Freshner',
-        description: 'Before composting, run a few slivers through your kitchen sink disposal with ice to clean blades and deodorize.'
+        title: 'Step 3: Keep Citrus Out of the Worm Bin',
+        description: 'If you keep red wigglers, compost citrus outdoors instead. Oregon State University lists citrus and onion scraps as potentially harmful to worms in confined bins, so these belong in your regular pile, not the wormery.'
       }
     ],
     benefits: [
-      'Adds trace minerals including potassium, phosphorus, calcium, and vitamin C.',
-      'Natural d-limonene acts as a mild deterrent for aphids, gnats, and nuisance pests.',
-      'Deodorizes compost piles, masking foul food odors with a clean citrus scent.'
+      'Adds organic matter and moisture to the pile, plus small amounts of potassium and other nutrients as it breaks down.',
+      'A useful way to keep fruit scraps out of the landfill without special equipment.',
+      'Simmered peel water gives bins and pot surfaces a fresh citrus scent without chemical cleaners.'
     ],
     limitations: [
       'The waxy outer cuticle slows breakdown if peels are thrown into compost completely whole.',
-      'Toxic to earthworms in small confined vermiculture bins if added in large quantities.',
-      'Can temporarily lower micro-pH in small static heaps if overloaded.'
+      'Citrus and onion scraps may be toxic to earthworms in confined vermiculture bins (Oregon State University), so keep them out or add very small amounts.',
+      'Overloading any single ingredient can unbalance a small pile \u2014 mix citrus in with the rest of your scraps and browns.'
     ],
     mythsBusted: [
       {
         myth: 'Citrus peels will kill your entire compost pile and never rot.',
-        reality: 'Penicillium digitatum (green mold) thrives on citrus and breaks down the peel rapidly in normal compost temperatures, leaving rich dark organic matter.'
+        reality: 'Green mould (commonly Penicillium) appearing on citrus is a normal part of decomposition and breaks the peel down along with everything else in the pile. Citrus does not sterilize a compost heap.'
       },
       {
         myth: 'Citrus acidifies your finished compost so badly it harms plants.',
-        reality: 'Finished compost has a natural buffering capacity; the final pH remains near 6.5–7.2 regardless of moderate citrus additions.'
+        reality: 'Ask Extension: the effect of citrus peels on soil or compost acidity would be negligible. A mixed pile buffers itself, and a large dose into a small container may make the surface temporarily acidic \u2014 another reason to scatter and mix rather than dump.'
       }
     ],
     commonMistakes: [
@@ -581,27 +598,28 @@ export const wasteGuides: WasteGuideItem[] = [
     faqs: [
       {
         question: 'Can I compost lemons, limes, and grapefruits too?',
-        answer: 'Yes! All citrus fruits follow the exact same rules: chop them up, balance with browns, and keep them under 15% of your total pile.'
+        answer: 'Yes \u2014 they all behave the same way. Chop them up, balance with browns, and add in moderation rather than dumping them in one layer.'
       },
       {
         question: 'Why do my orange peels grow green/blue fuzz in the bin?',
-        answer: 'That is Penicillium digitatum, a beneficial natural composting fungus that actively digests the peel. It is completely safe and normal in compost.'
+        answer: 'That is a natural composting mould (often Penicillium) digesting the peel. It is a normal, harmless stage of decomposition outdoors.'
       }
     ],
     references: [
-      'Royal Horticultural Society: "Composting Citrus and Other Acidic Kitchen Scraps"',
-      'University of Florida IFAS: "Citrus Byproducts as Organic Soil Amendments"',
-      'Organic Gardening Research Institute: "Vermicomposting Limitations and Citrus"'
+      { title: 'Ask Extension: Can citrus peels be added to compost?', url: 'https://ask.extension.org/kb/faq.php?id=859065' },
+      { title: 'Oregon State University Extension: Composting Worms (EM 9034)', url: 'https://extension.oregonstate.edu/catalog/em-9034-composting-worms' },
+      { title: 'US EPA: Composting At Home', url: 'https://www.epa.gov/recycle/composting-home' }
     ],
+    bottomLine: 'Chop citrus and compost it with your other scraps \u2014 it will not ruin the pile or acidify your soil. Keep it out of the worm bin, and treat citrus sprays as a folk rinse rather than pest control. Next: see [vegetable scraps for compost](/waste-to-garden/vegetable-scraps-for-compost) or [composting for beginners](/composting/composting-for-beginners).',
     relatedGuideSlugs: ['banana-peels-for-plants', 'vegetable-scraps-for-compost', 'coffee-grounds-for-plants']
   },
   {
     id: 'vegetable-scraps',
     slug: 'vegetable-scraps-for-compost',
-    title: 'Kitchen Vegetable Scraps: The Ultimate Green Compost Booster',
+    title: 'Kitchen Vegetable Scraps for Compost: Greens, Moisture, and Odor Balance',
     shortTitle: 'Vegetable Scraps for Compost',
     scientificName: 'Organic Kitchen Residues',
-    excerpt: 'Vegetable peels, carrot tops, squash rinds, and lettuce trimmings are the backbone of nutrient-rich black gold. Master the moisture and odor balance.',
+    excerpt: 'Vegetable peels, carrot tops, squash rinds, and lettuce trimmings are a dependable nitrogen-rich green for home composting. Balance them with dry browns to avoid odors and flies.',
     readingTime: '6 min read',
     category: 'Kitchen Scraps',
     suitability: 'Suitable',
@@ -609,7 +627,15 @@ export const wasteGuides: WasteGuideItem[] = [
     type: 'Green (Nitrogen)',
     featuredImage: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Assorted fresh vegetable scraps and peelings in a countertop composting crock',
-    quickAnswer: 'Raw kitchen vegetable scraps are the single best nitrogen-rich "green" ingredient for home composting. They provide essential moisture, nitrogen, and vitamins that fuel microbial action. To prevent slimy odor and fruit fly swarms, always bury vegetable scraps under at least 3 inches of brown carbon materials (cardboard, dry leaves, or sawdust).',
+    metaTitle: 'Vegetable Scraps for Compost: How to Balance Greens, Moisture, and Odor',
+    metaDescription: 'Raw vegetable scraps are a reliable green for home composting. How to bury them under browns, avoid rotten-egg smells and flies, and what to keep out of the pile.',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      'Most household organic waste is exactly this: peelings, trimmings, stalks, and wilted leaves from everyday cooking. It is a reliable nitrogen-rich "green" for a compost pile, and it breaks down faster than almost anything else you will add.',
+      'The trouble starts when wet scraps sit in a pile on their own. This guide covers how to add them so the pile stays sweet-smelling and aerobic instead of slimy and fly-blown.'
+    ],
+    featuredImageCaption: 'A countertop caddy with a scoop of dry carbon material keeps scraps from turning soggy.',
+    quickAnswer: 'Raw kitchen vegetable scraps are a dependable nitrogen-rich "green" for home composting. They provide moisture and nitrogen that fuel microbial action. To prevent slimy odor and fruit fly swarms, always bury vegetable scraps under at least 3 inches of brown carbon materials (cardboard, dry leaves, or sawdust) instead of leaving them exposed.',
     directSoilUsage: {
       allowed: false,
       explanation: 'Tossing fresh scraps directly on top of soil creates a feeding ground for flies, rodents, and raccoons. Dig a trench 10 inches underground (trench composting) or compost first.'
@@ -635,13 +661,13 @@ export const wasteGuides: WasteGuideItem[] = [
       },
       {
         title: 'Step 3: Bokashi Pre-Fermentation (Optional)',
-        description: 'Ferment scraps with EM-1 Bokashi bran for 2 weeks in an airtight bucket to allow cold composting and safe meat/dairy breakdown.'
+        description: 'For small apartments or winter collection, ferment scraps in a sealed bokashi bucket inoculated with bokashi bran for about two weeks, then bury the pickled material to finish in the soil over the following two to four weeks (North Carolina Cooperative Extension). This is fermentation, not composting \u2014 and unlike a regular pile, it accepts small amounts of meat and dairy.'
       }
     ],
     benefits: [
-      'Packed with micro and macronutrients: nitrogen, potassium, phosphorus, and zinc.',
+      'Provide nitrogen, potassium, phosphorus, and other nutrients that are released as microbes break them down.',
       'Naturally hydrates dry compost piles without needing a garden hose.',
-      'Diverts up to 400 lbs of household waste per family per year from methane-producing landfills.'
+      'Keeps food out of the waste stream: food is the most common material sent to US landfills (US EPA), and home composting is one way to reduce that.'
     ],
     limitations: [
       'Very high moisture content can cause anaerobic rotten odors if not balanced with dry browns.',
@@ -666,7 +692,7 @@ export const wasteGuides: WasteGuideItem[] = [
     faqs: [
       {
         question: 'Can I compost moldy vegetables?',
-        answer: 'Yes! Mold is simply nature’s decomposer fungi beginning the breakdown process. Moldy produce is 100% compost-safe.'
+        answer: 'Yes \u2014 mold is simply nature\u2019s decomposer fungi starting the breakdown. Moldy produce is fine to compost; bury it under browns as usual.'
       },
       {
         question: 'What do I do if my scrap bin smells like rotten eggs?',
@@ -674,10 +700,11 @@ export const wasteGuides: WasteGuideItem[] = [
       }
     ],
     references: [
-      'US EPA: "Reducing the Impact of Wasted Food by Feeding the Soil"',
-      'University of Wisconsin-Madison Extension: "Backyard Composting of Kitchen Scraps"',
-      'Journal of Cleaner Production: "Home Composting Efficiency and Nutrient Retention"'
+      { title: 'US EPA: Food Material-Specific Data \u2014 food is the most common material in US landfills', url: 'https://www.epa.gov/facts-and-figures-about-materials-waste-and-recycling/food-material-specific-data' },
+      { title: 'North Carolina Cooperative Extension: Bokashi composting \u2014 a faster, easier way to turn kitchen scraps into garden gold', url: 'https://beaufort.ces.ncsu.edu/news/bokashi-composting-a-faster-easier-way-to-turn-kitchen-scraps-into-garden-gold' },
+      { title: 'University of New Hampshire Extension: Composting for the Home Gardener', url: 'https://extension.unh.edu/resource/composting-home-gardener-fact-sheet' }
     ],
+    bottomLine: 'Vegetable scraps are easy compost gold \u2014 if you always bury them under dry browns and keep meat, oil, and dairy out of a regular pile. If they smell, the fix is always more carbon and more air. Next: learn the [green vs brown balance](/composting/green-vs-brown-materials) or read [how to make compost at home](/composting/how-to-make-compost-at-home).',
     relatedGuideSlugs: ['banana-peels-for-plants', 'potato-peels-for-compost', 'onion-peels-for-plants']
   },
   {
@@ -686,7 +713,7 @@ export const wasteGuides: WasteGuideItem[] = [
     title: 'Used Tea Leaves for Plants: Teabag Plastics Warning, Tannins, and Soil Benefits',
     shortTitle: 'Used Tea Leaves for Plants',
     scientificName: 'Camellia sinensis infusion residue',
-    excerpt: 'Tea leaves are a delicate, nutrient-dense organic fertilizer—but beware of hidden polypropylene microplastics in commercial tea bags.',
+    excerpt: 'Used loose tea leaves are mild, useful compost material \u2014 the bigger question is the bag. What is known about tea bag plastics, tannins, and using spent tea on soil.',
     readingTime: '5 min read',
     category: 'Kitchen Scraps',
     suitability: 'Suitable with preparation',
@@ -694,10 +721,18 @@ export const wasteGuides: WasteGuideItem[] = [
     type: 'Green (Nitrogen)',
     featuredImage: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Loose damp organic tea leaves alongside a steaming earthen teapot',
-    quickAnswer: 'Loose used tea leaves are safe, mild, and wonderful for both compost piles and soil conditioning. However, up to 70% of commercial tea bags contain synthetic plastic fibers (polypropylene or PET) that do not biodegrade and will contaminate your garden soil with permanent microplastics. Always cut open tea bags and compost only the loose leaves inside unless verified 100% unbleached paper.',
+    metaTitle: 'Used Tea Leaves for Plants: Tea Bags, Tannins, and Compost',
+    metaDescription: 'Loose used tea leaves are mild compost material. The bigger issue is the bag \u2014 many are sealed or made with plastic. What is safe for your soil.',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      'Tea is one of the easiest kitchen leftovers to compost: the leaves are finely shredded, moisture-rich, and break down within weeks. What trips people up is the bag, not the tea.',
+      'This guide covers where spent leaves actually help, why you should stop assuming they acidify soil, and how to tell whether your tea bags belong in the pile at all.'
+    ],
+    featuredImageCaption: 'Loose leaves compost directly; bags are the question.',
+    quickAnswer: 'Loose used tea leaves are safe and mild for both compost piles and soil conditioning. Be careful with the bags: many paper tea bags are heat-sealed with polypropylene, and pyramid bags are often nylon or PET \u2014 cut them open and compost only the leaves unless the packaging says home-compostable. A widely reported 2019 study found that plastic tea bags release large numbers of microscopic particles into a brew; Germany\u2019s Federal Institute for Risk Assessment later argued those figures were overstated, but the practical advice is unchanged: do not compost the bag unless it is certified.',
     directSoilUsage: {
       allowed: true,
-      explanation: 'Used loose tea leaves can be worked into the top 2 inches of soil around acid-loving shrubs like blueberries, camellias, hydrangeas, and ferns.'
+      explanation: 'Used loose tea leaves can be scratched lightly into the top layer of soil or added to compost. Do not count on tea to acidify soil \u2014 there is no extension evidence that spent leaves change soil pH, so get a soil test and use a purpose-made amendment for acid-loving plants.'
     },
     compostSuitability: {
       recommended: true,
@@ -705,62 +740,64 @@ export const wasteGuides: WasteGuideItem[] = [
       details: 'Due to their small particle size, loose tea leaves break down quickly and generate gentle warmth in compost piles.'
     },
     preparationSteps: [
-      'Cut open and discard the outer tea bag unless certified 100% home compostable paper with no plastic heat-seal.',
+      'Cut open and discard the outer tea bag unless certified home compostable paper with no plastic heat-seal.',
       'Remove strings and metal staples.',
       'Spread out loose tea to cool and dry slightly before adding to soil or compost.'
     ],
     howToUseSteps: [
       {
-        title: 'Step 1: Acid-Loving Plant Booster',
-        description: 'Scatter 2-3 tablespoons of loose, used black or green tea around the base of acid-loving houseplants or garden shrubs, scratching into the mulch.'
+        title: 'Step 1: Compost Heap Layering (Best Method)',
+        description: 'Sprinkle loose tea throughout the compost pile as a nitrogen-rich green. The fine particles mix in easily and break down within a few weeks, alongside your other kitchen scraps and browns.'
       },
       {
-        title: 'Step 2: Compost Heap Layering',
-        description: 'Sprinkle loose tea throughout the compost pile to stimulate earthworm activity and provide rapid nitrogen.'
+        title: 'Step 2: Light Top-Dressing',
+        description: 'Scratch a thin scattering of cooled, loose leaves into the top layer of beds or containers. It is a mild, tidy way to use tea without bags \u2014 but treat it as organic matter, not as a pH or nutrient treatment.'
       },
       {
-        title: 'Step 3: Seed Germination Starter Mix',
-        description: 'Blend 5% spent tea leaves with potting seed mix to improve moisture retention and fungal biodiversity.'
+        title: 'Step 3: Worm Bin Addition',
+        description: 'Loose leaves (bag cut open, string and staple removed) are fine for worm bins in moderation. Oregon State University notes worms handle tea bags and grounds well when they are not piled on in bulk.'
       }
     ],
     benefits: [
-      'Rich in nitrogen (4%), phosphorus, and potassium trace minerals.',
-      'Tannic acid gently conditions soil structure and encourages beneficial acidophilic soil fungi.',
-      'High surface area makes it an instant food source for earthworms.'
+      'A mild green material: spent leaves supply some nitrogen, phosphorus, and potassium as they decompose.',
+      'Small particle size means they break down quickly and mix evenly through a pile.',
+      'High surface area makes them an easy food source for worms and compost microbes.'
     ],
     limitations: [
-      'Commercial pyramid teabags shed billions of plastic microfibers into soil.',
-      'High concentrations of tannins can inhibit some sensitive non-acid-loving vegetable seedlings.',
-      'Can attract surface molds if left in a soggy clump on houseplant potting soil.'
+      'Plastic-containing tea bags and seals do not break down and leave plastic fragments in soil if composted.',
+      'Wet tea leaves clumped on houseplant soil can mat together and grow surface mould.',
+      'Like any wet green, large quantities dumped in one spot can add moisture and nitrogen faster than a small pile can handle.'
     ],
     mythsBusted: [
       {
         myth: 'All "silky" tea bags are made of silk or cornstarch and melt into compost.',
-        reality: 'Lab tests show almost all silky pyramid bags are woven nylon or PET plastic. Never put them into your soil or compost.'
+        reality: 'Many silky pyramid bags are woven nylon or PET plastic, and many paper bags are sealed with polypropylene. Unless the packaging says home-compostable, cut the bag open and use the leaves only.'
       }
     ],
     commonMistakes: [
       'Throwing whole teabags with metal staples and nylon strings into compost.',
-      'Letting moist tea bags pile up in a saucer until they turn into toxic black slime.'
+      'Letting moist tea bags pile up in a saucer until they turn into a slimy, smelly clump.'
     ],
     safetyPrecautions: [
-      'Check tea packaging carefully; look for the "Plastic Free" trustmark before tossing bags whole.',
-      'Keep tea leaves away from pets, as concentrated caffeine can cause heart palpitations in dogs and cats.'
+      'Check tea packaging for home-compostable certification; when in doubt, cut the bag open and compost only the leaves.',
+      'Do not dump large volumes of strongly brewed tea where pets can reach it \u2014 caffeine is toxic to dogs and cats.'
     ],
     faqs: [
       {
         question: 'Can I use herbal teas (peppermint, chamomile, rooibos)?',
-        answer: 'Yes! Herbal teas contain zero caffeine and are 100% organic plant matter that enriches compost with diverse phytochemicals.'
+        answer: 'Yes \u2014 spent herbal leaves are plant matter like any other green. Compost them the same way, cutting the bag open if it is not certified home-compostable.'
       },
       {
         question: 'Are matcha residues good for soil?',
-        answer: 'Excellent! Matcha is the whole ground green tea leaf suspended in water, delivering 100% of the leaf’s nitrogen and chlorophyll directly to the soil.'
+        answer: 'Matcha is ground whole tea leaf, so the spent powder behaves like any other mild green compost material. It has no special ability to deliver nitrogen to plants \u2014 compost it and use the finished compost.'
       }
     ],
     references: [
-      'Environmental Science & Technology Journal: "Plastic Teabags Release Billions of Microscopic and Nanoscale Particles into Tea"',
-      'University of Arizona Cooperative Extension: "Using Spent Tea and Coffee in the Home Garden"'
+      { title: 'Plastic Teabags Release Microscopic and Nanoscale Particles into Tea (Environmental Science & Technology, 2019)', url: 'https://pubs.acs.org/doi/10.1021/acs.est.9b02540' },
+      { title: 'Comment: Critical Assessment of the Study on Microplastic Release from Plastic Tea Bags (Environmental Science & Technology)', url: 'https://pubs.acs.org/doi/10.1021/acs.est.0c03182' },
+      { title: 'Oregon State University Extension: Composting Worms (EM 9034)', url: 'https://extension.oregonstate.edu/catalog/em-9034-composting-worms' }
     ],
+    bottomLine: 'Compost loose tea leaves freely; cut open the bag unless it is certified home-compostable. Do not rely on tea to acidify soil or fertilize plants. Next: see [green vs brown materials](/composting/green-vs-brown-materials) or our guide to [coffee grounds for plants](/waste-to-garden/coffee-grounds-for-plants).',
     relatedGuideSlugs: ['coffee-grounds-for-plants', 'vegetable-scraps-for-compost', 'banana-peels-for-plants']
   },
   {
@@ -769,57 +806,69 @@ export const wasteGuides: WasteGuideItem[] = [
     title: 'Onion & Garlic Peels for Plants: Sulfur Benefits, Soil Application, and Composting',
     shortTitle: 'Onion Peels for Plants',
     scientificName: 'Allium cepa skin',
-    excerpt: 'Onion skins are rich in quercetin, sulfur, and potassium. Learn how they act as natural disease shields without giving your compost a foul stench.',
+    excerpt: 'Onion and garlic peels are compostable kitchen waste. Learn how to compost them, why to keep them out of worm bins, and which folk-remedy claims to skip.',
     readingTime: '5 min read',
     category: 'Kitchen Scraps',
     suitability: 'Suitable with preparation',
-    cToNRatio: '25:1 (Balanced Carbon/Green)',
+    cToNRatio: 'Not firmly established \u2014 dry skins lean carbon, fleshy ends lean nitrogen',
     type: 'Brown (Carbon)',
     featuredImage: 'https://images.unsplash.com/photo-1518977822534-7049a61ee0c2?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Golden dry onion skins and shallot trimmings in a gardening basket',
-    quickAnswer: 'Dry onion skins and garlic peels are 100% compostable and make outstanding pest-repelling garden amendments. Onion skins contain natural sulfur compounds and high concentrations of quercetin, a powerful antioxidant that protects plant roots against fungal attacks. The papery skins act like carbon "browns", while the fleshy root ends are nitrogen "greens".',
+    metaTitle: 'Onion and Garlic Peels for Compost: What Works, What Doesn\u2019t',
+    metaDescription: 'Onion and garlic peels are compostable kitchen waste. How to compost them, why to keep them out of worm bins, and which folk-remedy claims to skip.',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      'Onion skins are light, dry, and plentiful \u2014 and they attract a small industry of claims: sulfur for this, quercetin for that, a spray that repels aphids, a mulch that stops burrowing pests. Almost none of that has been tested in a garden.',
+      'What extension sources do support is straightforward: allium scraps are fine in an outdoor pile, potentially harmful in a worm bin, and best treated as ordinary compostable material rather than a plant medicine.'
+    ],
+    featuredImageCaption: 'Dry skins are compostable carbon-rich material; chop the fleshy ends.',
+    quickAnswer: 'Dry onion skins and garlic peels are compostable and can go in small amounts into a garden pile. They are not a proven pest repellent or disease shield \u2014 the quercetin and sulfur claims come from lab studies of allium extracts, not garden trials. The papery skins act like carbon "browns" while the fleshy root ends are nitrogen "greens", and keep alliums out of indoor worm bins, where they may harm worms (Oregon State University).',
     directSoilUsage: {
       allowed: true,
-      explanation: 'Dry papery skins can be mulched lightly around plants or steeped into a natural pest-repellent wash. Avoid dumping large amounts of wet whole rotting onions directly on beds.'
+      explanation: 'Dry papery skins can be scattered lightly as part of a surface mulch. Avoid piling fresh, wet onion scraps on beds \u2014 they rot, smell, and attract flies. There is no extension evidence that onion skins repel pests or disease, so treat them as organic matter, not protection.'
     },
     compostSuitability: {
       recommended: true,
       speed: 'Moderate (1-3 months)',
-      details: 'Onion skins break down smoothly in outdoor piles. In indoor worm bins, keep allium quantities low as worms dislike the pungent sulfur vapors.'
+      details: 'Onion skins break down smoothly in outdoor piles. Keep allium quantities low in indoor worm bins \u2014 Oregon State University guidance lists onions as potentially harmful to worms in confined systems.'
     },
     preparationSteps: [
       'Separate dry papery outer skins from moist inner bulbs.',
-      'Chop thick root bottoms into small pieces.',
-      'Soak dry skins in water for 24-48 hours to make a natural protective foliar spray.'
+      'Chop thick root bottoms and fleshy scraps small so they do not mat together.',
+      'Crush dry skins before adding so they do not blow away and sit on top of the pile.'
     ],
     howToUseSteps: [
       {
-        title: 'Step 1: Protective Onion Skin Tea',
-        description: 'Steep a handful of golden onion skins in 1 liter of room-temperature water for 24 hours. Strain and spray on tomato and rose foliage to deter aphids and powdery mildew.'
+        title: 'Step 1: Traditional Onion-Skin Soak (Optional)',
+        description: 'Steep a handful of golden onion skins in 1 liter of water for 24 hours and strain. Gardeners have long used this as a mild foliar rinse, but there is no controlled evidence it controls aphids or powdery mildew \u2014 do not rely on it for pest or disease management.'
       },
       {
         title: 'Step 2: Compost Heap Layering',
         description: 'Toss papery skins into the bin alongside other carbon browns like shredded cardboard to balance moisture.'
       },
       {
-        title: 'Step 3: Mulch Barrier for Perennials',
-        description: 'Work crushed dry skins into the surface mulch around root crops to discourage burrowing pests.'
+        title: 'Step 3: Surface Mulch Addition',
+        description: 'Crush dry skins and mix them into surface mulch, where they break down quietly and add organic matter. Any pest-deterrent effect should be considered unproven.'
       }
     ],
     benefits: [
-      'High in sulfur, which helps plants synthesize essential amino acids and proteins.',
-      'Rich in quercetin, a flavonoid with proven antifungal and pest-deterrent properties.',
+      'Breaks down to release small amounts of sulfur and other nutrients into the pile.',
+      'Dry skins are a light carbon-leaning material that helps soak up moisture from wetter scraps.',
       'Free of weed seeds and pathogens, creating clean compost matter.'
     ],
     limitations: [
       'Strong sulfur odor if rotting anaerobically in un-aerated indoor bins.',
-      'Disliked by composting earthworms (red wigglers) in confined vermicompost bins.',
+      'Allium scraps may harm composting earthworms (red wigglers) in confined vermicompost bins (Oregon State University).',
       'Paper skins are lightweight and blow away in high winds if not covered.'
     ],
     mythsBusted: [
       {
         myth: 'Putting onion skins in compost will make all your future vegetables taste like onions.',
-        reality: 'Composting completely breaks down sulfur compounds into basic elemental ions. Finished compost will never flavor your future carrots or strawberries.'
+        reality: 'Once composting is finished, the smell and flavor compounds are long gone \u2014 finished compost does not make your future carrots or strawberries taste like onions.'
+      },
+      {
+        myth: 'Onion skin tea or mulch protects plants against fungal attack.',
+        reality: 'Not supported. The quercetin and sulfur claims are extrapolated from laboratory studies of allium compounds, not from garden trials. Extensions recommend proven cultural practices \u2014 airflow, watering at the base, and crop rotation \u2014 instead.'
       }
     ],
     commonMistakes: [
@@ -832,13 +881,15 @@ export const wasteGuides: WasteGuideItem[] = [
     faqs: [
       {
         question: 'Are red onion skins different from yellow onion skins?',
-        answer: 'Both are equally beneficial. Red onion skins contain additional anthocyanin pigments, while yellow skins are slightly richer in quercetin.'
+        answer: 'They behave the same way in compost. Red skins get their color from anthocyanin pigments; use whichever you have.'
       }
     ],
     references: [
-      'Journal of Agricultural and Food Chemistry: "Antioxidant and Antifungal Activity of Allium Byproducts"',
-      'Cornell University Department of Horticulture: "Composting Kitchen Scraps and Odor Control"'
+      { title: 'Ask Extension: Are citrus peels and onion scraps okay for composting and worms?', url: 'https://ask.extension.org/kb/faq.php?id=737589' },
+      { title: 'Oregon State University Extension: Composting Worms (EM 9034)', url: 'https://extension.oregonstate.edu/catalog/em-9034-composting-worms' },
+      { title: 'US EPA: Composting At Home', url: 'https://www.epa.gov/recycle/composting-home' }
     ],
+    bottomLine: 'Compost onion and garlic scraps with the rest of your kitchen waste \u2014 chopped, mixed with browns, and kept out of the worm bin. Treat skin teas and mulches as folklore, not plant medicine. Next: see [vegetable scraps for compost](/waste-to-garden/vegetable-scraps-for-compost) or [green vs brown materials](/composting/green-vs-brown-materials).',
     relatedGuideSlugs: ['potato-peels-for-compost', 'vegetable-scraps-for-compost', 'banana-peels-for-plants']
   },
   {
@@ -855,7 +906,15 @@ export const wasteGuides: WasteGuideItem[] = [
     type: 'Green (Nitrogen)',
     featuredImage: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Fresh potato peelings and raw vegetable scraps in an organic compost container',
-    quickAnswer: 'Yes, potato peels make great compost material, supplying potassium, phosphorus, and energetic starches that feed beneficial thermophilic bacteria. However, two precautions are crucial: never compost potato peels showing signs of Late Blight (dark sunken rot), and make sure "eyes" on thick peelings are chopped so they don\'t sprout into unwanted potato vines inside your bin.',
+    metaTitle: 'Potato Peels for Compost: Sprouting, Blight, and Solanine Explained',
+    metaDescription: 'Healthy potato peelings compost fine. What to do about eyes, late blight, and solanine \u2014 plus what extension sources say about diseased material.',
+    reviewStatus: 'needs-human-review',
+    introduction: [
+      'Potato peelings are one of the most common scraps in a kitchen caddy, and they compost quickly. The worries people have \u2014 sprouting eyes, green-skin poison, blight \u2014 are real in narrow cases, not the general rule.',
+      'Here is how to handle each one, and where extension sources disagree about diseased material.'
+    ],
+    featuredImageCaption: 'Chopped healthy peelings compost quickly; chop up any eyes.',
+    quickAnswer: 'Yes, potato peels make good compost material, supplying potassium, phosphorus, and starches that feed compost microbes. Two precautions matter: never compost potato peels showing dark blight lesions without deciding how to handle them (see below), and chop any eyes on thick peelings so they do not sprout into unwanted potato vines inside your bin.',
     directSoilUsage: {
       allowed: false,
       explanation: 'Raw potato peels should not be laid on top of soil; they will root, sprout volunteer vines, or turn slimy while attracting beetles and slugs.'
@@ -863,25 +922,25 @@ export const wasteGuides: WasteGuideItem[] = [
     compostSuitability: {
       recommended: true,
       speed: 'Fast (2-4 weeks)',
-      details: 'Due to their high starch and sugar content, potato peels ferment rapidly in warm compost, providing a quick burst of microbial heat.'
+      details: 'Due to their high starch and sugar content, potato peels break down rapidly in warm compost, providing a quick burst of microbial activity.'
     },
     preparationSteps: [
-      'Inspect for disease: discard peels with dark, corky blight lesions into the municipal trash.',
+      'Inspect for disease: discard peels with dark, corky blight lesions into the municipal trash (see the blight note below).',
       'Slice or dice thick peels to destroy any remaining viable sprout eyes.',
       'Mix immediately with dry brown materials to offset the wet starch moisture.'
     ],
     howToUseSteps: [
       {
         title: 'Step 1: Hot Compost Core Deposit',
-        description: 'Bury potato peelings into the deep core of your compost pile where temperatures exceed 130°F (55°C) to kill sprout eyes and speed digestion.'
+        description: 'Bury potato peelings into the deep core of your compost pile where temperatures exceed 130\u00B0F (55\u00B0C) to kill sprout eyes and speed digestion. Pile temperatures above about 140\u00B0F also destroy most weed seeds and plant pathogens (NC State Extension).'
       },
       {
-        title: 'Step 2: Vermicomposting Snack',
-        description: 'Worms enjoy boiled or microwaved potato peelings (cooked for 60 seconds to soften the starch and destroy viable eye buds).'
+        title: 'Step 2: Vermicomposting (Optional)',
+        description: 'Some worm-keeping guides cook peels briefly first to soften the starch and kill viable eye buds; Oregon State University notes worms often avoid raw potato peels anyway. Add only small amounts, or compost potato peels outdoors instead.'
       },
       {
-        title: 'Step 3: Starch-Water Garden Drench',
-        description: 'Cool water from boiling unsalted potatoes and use as a soil drench around flowering annuals for an instant potassium and starch microbial boost.'
+        title: 'Step 3: Starch-Water Garden Watering',
+        description: 'Cool the water from boiling unsalted potatoes and use it to water plants. It is a mild, free way to use the starch and dissolved nutrients \u2014 treat it as ordinary watering, not a fertilizer treatment.'
       }
     ],
     benefits: [
@@ -891,13 +950,13 @@ export const wasteGuides: WasteGuideItem[] = [
     ],
     limitations: [
       'Thick peels with "eyes" can sprout into vigorous unwanted potato vines in cold compost bins.',
-      'Carries a theoretical risk of overwintering late blight (Phytophthora infestans) if sourced from infected store tubers.',
-      'Contains solanine (a natural glycoalkaloid), which is neutralized during composting but should not be fed raw to livestock in massive quantities.'
+      'Late blight (Phytophthora infestans) can overwinter in infected tubers that sit in a pile that never heats up or freezes; University of Massachusetts guidance says an actively heating pile handles it, while other extensions advise bagging diseased material. When in doubt, trash it.',
+      'Contains solanine (a natural glycoalkaloid) in green parts; it breaks down as organic matter composts, but do not feed large amounts of raw green peelings to livestock.'
     ],
     mythsBusted: [
       {
         myth: 'The green skin on potatoes contains poison that will kill all your compost microbes.',
-        reality: 'Solanine is toxic to humans and mammals if consumed in large amounts, but compost soil bacteria break it down safely and completely within days.'
+        reality: 'Solanine is toxic to humans and animals if consumed in large amounts, but it is an organic compound that breaks down as composting proceeds. Healthy peelings are not a practical concern for a home pile.'
       }
     ],
     commonMistakes: [
@@ -906,7 +965,7 @@ export const wasteGuides: WasteGuideItem[] = [
     ],
     safetyPrecautions: [
       'Keep raw green potato peels away from dogs, chickens, and pets due to solanine alkaloid sensitivity.',
-      'Always wash commercial potatoes before peeling to remove synthetic sprout-inhibitor chemicals (like chlorpropham).'
+      'Wash potatoes before peeling \u2014 commercial tubers may be treated with sprout-inhibiting residues, and washing removes what is on the surface.'
     ],
     faqs: [
       {
@@ -919,9 +978,11 @@ export const wasteGuides: WasteGuideItem[] = [
       }
     ],
     references: [
-      'Penn State Extension: "Preventing Late Blight Spread in Backyard Compost"',
-      'University of Maine Cooperative Extension: "Home Garden Composting and Potato Pests"'
+      { title: 'University of Massachusetts Extension: Late Blight Management (including composting of infected material)', url: 'https://www.umass.edu/agriculture-food-environment/sites/ag.umass.edu/files/fact-sheets/pdf/late_blight_management.pdf' },
+      { title: 'University of Maine Cooperative Extension: Gardening After Late Blight', url: 'https://www.maine.gov/DACF/php/gotpests/diseases/factsheets/late-blight-me.pdf' },
+      { title: 'Iowa State University Extension: Can I put disease-infested plant material in my compost pile?', url: 'https://yardandgarden.extension.iastate.edu/faq/can-i-put-disease-infested-plant-material-my-compost-pile' }
     ],
+    bottomLine: 'Healthy potato peelings are easy, fast compost \u2014 chop the eyes, mix with browns, and keep the pile warm. Bag anything that looks blighted. Next: read [vegetable scraps for compost](/waste-to-garden/vegetable-scraps-for-compost) or [how long does compost take](/composting/how-long-does-compost-take).',
     relatedGuideSlugs: ['onion-peels-for-plants', 'vegetable-scraps-for-compost', 'banana-peels-for-plants']
   }
 ];

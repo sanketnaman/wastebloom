@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { ChevronDown, ChevronUp, Printer, ShieldCheck } from 'lucide-react';
+import { ChevronDown, ChevronUp, Printer, ShieldCheck, ShieldAlert } from 'lucide-react';
 import { gardeningGuides } from '../data/gardeningGuides';
-import { resolveRelatedGuides } from '../data/relatedGuides';
+import { resolveRelatedGuides, resolveReference } from '../data/relatedGuides';
 import { SEOHead } from '../components/SEOHead';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { RichText } from '../components/RichText';
@@ -106,8 +106,22 @@ export const GardeningArticlePage: React.FC<GardeningArticlePageProps> = ({ slug
 
         <div className="mt-4 pt-4 border-t border-[#CBD5CD]/40 flex items-center justify-between text-xs text-[#78847D]">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#387A53]" />
-            <span>Fact-Checked by {SITE_NAME} Horticultural Sciences</span>
+            {guide.reviewStatus === 'needs-human-review' ? (
+              <>
+                <ShieldAlert className="w-4 h-4 text-amber-600" />
+                <span>Draft — pending review by the {SITE_NAME} editorial team</span>
+              </>
+            ) : guide.reviewStatus === 'human-reviewed' ? (
+              <>
+                <ShieldCheck className="w-4 h-4 text-[#387A53]" />
+                <span>Fact-Checked by {SITE_NAME} Horticultural Sciences</span>
+              </>
+            ) : (
+              <>
+                <ShieldCheck className="w-4 h-4 text-[#78847D]" />
+                <span>An editorial guide from {SITE_NAME}</span>
+              </>
+            )}
           </div>
           <button onClick={() => window.print()} className="flex items-center gap-1 hover:text-[#183D32]">
             <Printer className="w-3.5 h-3.5" /> Print
@@ -116,13 +130,13 @@ export const GardeningArticlePage: React.FC<GardeningArticlePageProps> = ({ slug
       </header>
 
       <div className="rounded-3xl overflow-hidden shadow-md mb-8 aspect-16/9">
-        <img src={guide.featuredImage} alt={guide.title} className="w-full h-full object-cover" />
+        <img src={guide.featuredImage} alt={guide.imageAlt} className="w-full h-full object-cover" />
       </div>
 
       <div className="space-y-8 text-[#26332D]">
         <div className="bg-white p-6 md:p-8 rounded-3xl border border-[#E3EDE1]">
           <p className="text-sm md:text-base leading-relaxed text-[#26332D]/90">
-            <RichText text={guide.excerpt} onNavigate={onNavigate} />
+            <RichText text={guide.introduction ?? guide.excerpt} onNavigate={onNavigate} />
           </p>
         </div>
 
@@ -156,6 +170,33 @@ export const GardeningArticlePage: React.FC<GardeningArticlePageProps> = ({ slug
                 </div>
               ))}
             </div>
+          </section>
+        )}
+
+        {guide.references && guide.references.length > 0 && (
+          <section className="p-6 rounded-3xl bg-[#F8F6EE] border border-[#CBD5CD] text-xs text-[#78847D]">
+            <h3 className="font-bold text-[#183D32] text-sm mb-2">Sources &amp; Further Reading:</h3>
+            <ul className="space-y-1.5 list-disc list-inside">
+              {guide.references.map((ref, i) => {
+                const resolved = resolveReference(ref);
+                return (
+                  <li key={i}>
+                    {resolved.url ? (
+                      <a
+                        href={resolved.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#387A53] hover:underline"
+                      >
+                        {resolved.title}
+                      </a>
+                    ) : (
+                      resolved.title
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
           </section>
         )}
 
