@@ -18,16 +18,28 @@ import { LegalPage } from './pages/LegalPage';
 import { LEGAL_PAGE_TYPES } from './data/legalRoutes';
 import type { LegalPageType } from './data/legalRoutes';
 
+const BASE = import.meta.env.BASE_URL.replace(/\/$/, '') || '';
+
+const stripBase = (pathname: string): string => {
+  const path = pathname || '/';
+  if (!BASE) return path;
+  if (path === BASE) return '/';
+  if (path.startsWith(`${BASE}/`)) return path.slice(BASE.length) || '/';
+  return path;
+};
+
+const withBase = (path: string): string => (BASE ? `${BASE}${path === '/' ? '/' : path}` : path);
+
 export function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => {
-    return window.location.pathname || '/';
+    return stripBase(window.location.pathname);
   });
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Handle browser back/forward buttons
   useEffect(() => {
     const handlePopState = () => {
-      setCurrentPath(window.location.pathname || '/');
+      setCurrentPath(stripBase(window.location.pathname));
     };
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
@@ -39,7 +51,7 @@ export function App() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    window.history.pushState({}, '', path);
+    window.history.pushState({}, '', withBase(path));
     setCurrentPath(path);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

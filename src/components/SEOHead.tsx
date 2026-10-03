@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { absoluteUrl } from '../config/site';
+import { isPreviewDeployment } from '../config/deployment';
 
 interface SEOHeadProps {
   title: string;
@@ -46,39 +47,44 @@ export const SEOHead: React.FC<SEOHeadProps> = ({
   schema,
 }) => {
   useEffect(() => {
+    const preview = isPreviewDeployment();
     const fullTitle = title.includes('WasteBloom') ? title : `${title} - WasteBloom`;
     document.title = fullTitle;
 
     upsertMeta('name', 'description', description);
-    if (robots) upsertMeta('name', 'robots', robots);
+    const robotsContent = preview ? 'noindex, nofollow' : robots;
+    if (robotsContent) upsertMeta('name', 'robots', robotsContent);
     else document.querySelector('meta[name="robots"]')?.remove();
 
-    const canonical = canonicalPath ? absoluteUrl(canonicalPath) : null;
-    const ogImage = image ? absoluteUrl(image) : null;
+    const canonical = !preview && canonicalPath ? absoluteUrl(canonicalPath) : null;
+    const ogImage = !preview && image ? absoluteUrl(image) : null;
 
     upsertMeta('property', 'og:title', fullTitle);
     upsertMeta('property', 'og:description', description);
     upsertMeta('property', 'og:type', ogType);
     if (canonical) upsertMeta('property', 'og:url', canonical);
     if (ogImage) upsertMeta('property', 'og:image', ogImage);
+    else document.querySelector('meta[property="og:image"]')?.remove();
     upsertMeta('name', 'twitter:card', ogImage ? 'summary_large_image' : 'summary');
     upsertMeta('name', 'twitter:title', fullTitle);
     upsertMeta('name', 'twitter:description', description);
 
     if (canonical) upsertLink('canonical', canonical);
+    else document.querySelector('link[rel="canonical"]')?.remove();
 
     if (ogType === 'article' && publishedTime) upsertMeta('property', 'article:published_time', publishedTime);
     if (ogType === 'article' && modifiedTime) upsertMeta('property', 'article:modified_time', modifiedTime);
 
     let jsonLdScript = document.getElementById('page-json-ld');
-    if (schema) {
+    const effectiveSchema = preview ? undefined : schema;
+    if (effectiveSchema) {
       if (!jsonLdScript) {
         jsonLdScript = document.createElement('script');
         jsonLdScript.id = 'page-json-ld';
         jsonLdScript.setAttribute('type', 'application/ld+json');
         document.head.appendChild(jsonLdScript);
       }
-      jsonLdScript.textContent = JSON.stringify(schema);
+      jsonLdScript.textContent = JSON.stringify(effectiveSchema);
     } else if (jsonLdScript) {
       jsonLdScript.remove();
     }

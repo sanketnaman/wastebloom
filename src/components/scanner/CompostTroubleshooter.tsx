@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { AlertTriangle, Wrench, CheckCircle2, RefreshCw, Sparkles, HelpCircle } from 'lucide-react';
+import { AlertTriangle, Wrench, CheckCircle2, RefreshCw, Sparkles, HelpCircle, Info } from 'lucide-react';
+import { isPreviewDeployment } from '../../config/deployment';
 
 interface TroubleSymptom {
   id: string;
@@ -104,6 +105,7 @@ export const CompostTroubleshooter: React.FC = () => {
   const [selectedSymptomId, setSelectedSymptomId] = useState<string>('rotten-eggs');
   const [customQuery, setCustomQuery] = useState('');
   const [loadingCustom, setLoadingCustom] = useState(false);
+  const [diagnoseNotice, setDiagnoseNotice] = useState<string | null>(null);
   const [customResult, setCustomResult] = useState<{
     cause: string;
     immediateAction: string[];
@@ -116,6 +118,16 @@ export const CompostTroubleshooter: React.FC = () => {
   const handleCustomDiagnose = async () => {
     if (!customQuery.trim()) return;
     setLoadingCustom(true);
+    setDiagnoseNotice(null);
+
+    if (isPreviewDeployment()) {
+      setDiagnoseNotice(
+        'Live AI diagnosis is unavailable in this public preview because the static build has no backend, so no custom result was produced. Select a common symptom above for a curated recovery plan.'
+      );
+      setLoadingCustom(false);
+      return;
+    }
+
     try {
       const res = await fetch('/api/ai/troubleshoot', {
         method: 'POST',
@@ -126,26 +138,15 @@ export const CompostTroubleshooter: React.FC = () => {
       if (data.available && data.data) {
         setCustomResult(data.data);
       } else {
-        // Fallback diagnosis heuristic
-        setCustomResult({
-          cause: 'Imbalance between moisture, air circulation, and the carbon-to-nitrogen ratio.',
-          immediateAction: [
-            'Turn the pile to evaluate internal moisture levels and core temperature',
-            'Incorporate dry brown materials (shredded cardboard or dry leaves) to absorb liquids',
-            'Ensure drainage holes are not blocked with mud or sludge',
-          ],
-          recoveryPlan: [
-            'Monitor every 2 days for odor stabilization and temperature rebound',
-            'Bury all fresh kitchen additions deeply into the central core',
-          ],
-          prevention: [
-            'Maintain the 2:1 brown-to-green volume rule',
-            'Turn every 1-2 weeks to ensure aerobic microbial dominance',
-          ],
-        });
+        setDiagnoseNotice(
+          data.message ??
+            'AI diagnosis is not available right now, so no custom result was produced. Select a common symptom above for a curated recovery plan.'
+        );
       }
     } catch {
-      alert('Could not diagnose issue right now. Please try again or select a common symptom.');
+      setDiagnoseNotice(
+        'Could not reach the diagnosis service, so no custom result was produced. Select a common symptom above for a curated recovery plan.'
+      );
     } finally {
       setLoadingCustom(false);
     }
@@ -175,6 +176,7 @@ export const CompostTroubleshooter: React.FC = () => {
               onClick={() => {
                 setSelectedSymptomId(s.id);
                 setCustomResult(null);
+                setDiagnoseNotice(null);
               }}
               className={`p-3 rounded-2xl text-left text-xs font-medium border transition ${
                 selectedSymptomId === s.id && !customResult
@@ -210,6 +212,17 @@ export const CompostTroubleshooter: React.FC = () => {
           </button>
         </div>
       </div>
+
+      {/* Honest unavailable notice for custom AI diagnosis */}
+      {diagnoseNotice && !customResult && (
+        <div className="mb-6 p-4 rounded-2xl bg-[#FDF6E3] border border-[#E8D9A8] flex items-start gap-3" role="alert">
+          <Info className="w-5 h-5 text-[#B9770E] shrink-0 mt-0.5" />
+          <div className="text-xs text-[#4A5D52] leading-relaxed">
+            <strong className="block text-xs font-bold text-[#183D32] mb-0.5">No custom diagnosis available</strong>
+            {diagnoseNotice}
+          </div>
+        </div>
+      )}
 
       {/* Diagnosis Report Card */}
       <div className="bg-[#183D32] text-white p-6 md:p-8 rounded-3xl shadow-md border border-white/10 space-y-6 animate-fadeIn">

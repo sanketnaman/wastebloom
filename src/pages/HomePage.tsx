@@ -25,6 +25,7 @@ import { compostingGuides } from '../data/compostingGuides';
 import { diyProjects } from '../data/diyProjects';
 import { SEOHead } from '../components/SEOHead';
 import { SafeImage } from '../components/SafeImage';
+import { isPreviewDeployment } from '../config/deployment';
 
 interface HomePageProps {
   onNavigate: (path: string) => void;
@@ -36,6 +37,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const [selectedFileName, setSelectedFileName] = useState<string>('');
   const [analyzing, setAnalyzing] = useState(false);
   const [scanResult, setScanResult] = useState<any | null>(null);
+  const [scanError, setScanError] = useState<string | null>(null);
+  const [scanSource, setScanSource] = useState<'demo' | 'ai' | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Newsletter state
@@ -162,12 +165,23 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     setSelectedImage(sample.image);
     setSelectedFileName(sample.name);
     setScanResult(sample.data);
+    setScanSource('demo');
+    setScanError(null);
   };
 
   const triggerAnalysis = async (imgBase64: string, name: string) => {
-    setAnalyzing(true);
     setScanResult(null);
+    setScanSource(null);
+    setScanError(null);
 
+    if (isPreviewDeployment()) {
+      setScanError(
+        'Live AI scanning is unavailable in this public preview because the static build has no analysis backend, so your photo was not analyzed. Try a sample example above for a labeled demonstration, or browse our guides.'
+      );
+      return;
+    }
+
+    setAnalyzing(true);
     try {
       const response = await fetch('/api/ai/scan-waste', {
         method: 'POST',
@@ -181,37 +195,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       const json = await response.json();
       if (json.available && json.data) {
         setScanResult(json.data);
+        setScanSource('ai');
       } else {
-        // Fallback for general uploaded items
-        setScanResult({
-          identifiedMaterial: name.replace(/\.[^/.]+$/, '') || 'Kitchen Organic Scrap',
-          confidence: 'Medium',
-          compostSuitability: 'Suitable with preparation',
-          gardeningApplications: [
-            'Compost bin organic moisture and nutrient builder',
-            'Soil conditioner when balanced with dry carbon browns'
-          ],
-          preparation: [
-            'Chop into 1-inch pieces to accelerate decomposition',
-            'Ensure clean of plastic tags, rubber bands, or synthetic stickers',
-            'Layer with 2 parts dry brown leaves or cardboard'
-          ],
-          usageGuidance: 'Add to an aerated compost heap or tumbler. Turn once every 5 to 7 days for fast decomposition.',
-          precautions: ['Bury inside pile to avoid attracting local pests or flies'],
-          cToNRatio: 'Estimated 20:1 to 30:1 (Green Nitrogen)'
-        });
+        setScanError(
+          json.message ??
+            'AI image analysis is not available, so your photo was not analyzed. Try a sample example above, or browse our guides.'
+        );
       }
     } catch {
-      setScanResult({
-        identifiedMaterial: name.replace(/\.[^/.]+$/, '') || 'Organic Garden Material',
-        confidence: 'Medium',
-        compostSuitability: 'Suitable with preparation',
-        gardeningApplications: ['Compost pile organic matter'],
-        preparation: ['Chop small and balance with dry brown carbon'],
-        usageGuidance: 'Bury in the center of an active compost pile.',
-        precautions: ['Keep moisture like a wrung-out sponge.'],
-        cToNRatio: 'Balanced organic matter'
-      });
+      setScanError(
+        'Could not reach the analysis service, so no result was produced. Please try again, use a sample example above, or browse our guides.'
+      );
     } finally {
       setAnalyzing(false);
     }
@@ -221,6 +215,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     e.preventDefault();
     const email = newsletterEmail.trim();
     if (!email || !email.includes('@')) return;
+    if (isPreviewDeployment()) {
+      setNewsletterState({
+        status: 'unconfigured',
+        message: 'Newsletter signup is not available in this public preview, so no address was submitted or stored.',
+      });
+      return;
+    }
     setNewsletterState({ status: 'submitting' });
     try {
       const response = await fetch('/api/newsletter/subscribe', {
@@ -622,19 +623,24 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           />
 
           {/* Interactive Result Display (if an item is scanned or selected) */}
-          {(analyzing || scanResult) && (
+          {(analyzing || scanResult || scanError) && (
             <div className="mt-6 bg-white rounded-2xl p-6 border border-[#367B53]/30 shadow-sm animate-fadeIn">
               {analyzing ? (
                 <div className="flex items-center justify-center gap-3 py-6 text-xs font-bold text-[#153F32]">
                   <div className="w-5 h-5 border-2 border-[#367B53] border-t-transparent rounded-full animate-spin" />
                   <span>Analyzing waste material and identifying evidence-based gardening uses...</span>
                 </div>
-              ) : (
+              ) : scanResult ? (
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E3ECE0] pb-3">
                     <div>
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#367B53]">
                         Identification Result
+                        {scanSource === 'demo' && (
+                          <span className="ml-2 px-2 py-0.5 rounded-full bg-[#F39C12]/15 text-[#B9770E] normal-case">
+                            Sample data — demonstration
+                          </span>
+                        )}
                       </span>
                       <h3 className="text-lg font-extrabold text-[#153F32]">
                         {scanResult.identifiedMaterial}
@@ -677,6 +683,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       <span>Read comprehensive guide</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="flex items-start gap-3 p-4 rounded-xl bg-[#FDF6E3] border border-[#E8D9A8]"
+                  role="alert"
+                >
+                  <AlertTriangle className="w-5 h-5 text-[#B9770E] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block text-xs font-bold text-[#153F32] mb-1">
+                      No analysis result
+                    </strong>
+                    <p className="text-xs text-[#4A5D52] leading-relaxed">{scanError}</p>
                   </div>
                 </div>
               )}

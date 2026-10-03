@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Camera, Sparkles, CheckCircle2, AlertTriangle, XCircle, ArrowRight, RefreshCw, FileText, Info } from 'lucide-react';
 import { AIScanResult } from '../../types';
+import { isPreviewDeployment } from '../../config/deployment';
 
 interface WasteScannerProps {
   onNavigateToGuide?: (slug: string) => void;
@@ -171,6 +172,13 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
 
   // Check backend AI status on mount
   useEffect(() => {
+    if (isPreviewDeployment()) {
+      setAiStatus({
+        enabled: false,
+        message: 'Live AI scanning is unavailable in this public preview. Sample items and all guides still work.',
+      });
+      return;
+    }
     fetch('/api/ai/status')
       .then((res) => res.json())
       .then((data) => setAiStatus(data))
@@ -234,6 +242,14 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
       return;
     }
 
+    if (isPreviewDeployment()) {
+      setAnalysisError(
+        'Live AI scanning is unavailable in this public preview because the static build has no analysis backend, so your photo was not analyzed. Try a sample item above for a labeled demonstration, or browse our guides.'
+      );
+      setAnalyzing(false);
+      return;
+    }
+
     try {
       const response = await fetch('/api/ai/scan-waste', {
         method: 'POST',
@@ -290,7 +306,11 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
         {aiStatus && (
           <div className={`px-3 py-1.5 rounded-full text-xs font-medium flex items-center gap-2 ${aiStatus.enabled ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-amber-50 text-amber-900 border border-amber-200'}`}>
             <span className={`w-2 h-2 rounded-full ${aiStatus.enabled ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
-            {aiStatus.enabled ? 'AI Vision Active (Gemini)' : 'Interactive Preview Mode'}
+            {aiStatus.enabled
+              ? 'AI Vision Active (Gemini)'
+              : isPreviewDeployment()
+                ? 'Static Preview — No AI Backend'
+                : 'Interactive Preview Mode'}
           </div>
         )}
       </div>
@@ -300,8 +320,14 @@ export const WasteScanner: React.FC<WasteScannerProps> = ({ onNavigateToGuide })
         <div className="mb-6 p-4 rounded-2xl bg-[#F8F6EE] border border-[#CBD5CD] flex items-start gap-3">
           <Info className="w-5 h-5 text-[#387A53] shrink-0 mt-0.5" />
           <div className="text-xs text-[#26332D]">
-            <strong className="block text-sm font-bold text-[#183D32] mb-0.5">AI image analysis is not configured on this server</strong>
-            Uploaded photos will not be analyzed here. The quick-select sample items below show curated demonstration results, and all of our guides and calculators work fully.
+            <strong className="block text-sm font-bold text-[#183D32] mb-0.5">
+              {isPreviewDeployment()
+                ? 'Live AI scanning is unavailable in this public preview'
+                : 'AI image analysis is not configured on this server'}
+            </strong>
+            {isPreviewDeployment()
+              ? 'This preview is a static build with no backend, so uploaded photos are not analyzed. The quick-select sample items below show clearly labeled demonstration results, and all of our guides and calculators work fully.'
+              : 'Uploaded photos will not be analyzed here. The quick-select sample items below show curated demonstration results, and all of our guides and calculators work fully.'}
           </div>
         </div>
       )}

@@ -1,11 +1,34 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import fs from 'fs';
 import path from 'path';
-import {defineConfig} from 'vite';
+import {defineConfig, type Plugin} from 'vite';
+
+const previewSeoPlugin: Plugin = {
+  name: 'wastebloom:preview-seo',
+  transformIndexHtml(html) {
+    return html
+      .replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '')
+      .replace('</head>', '    <meta name="robots" content="noindex, nofollow">\n  </head>');
+  },
+};
+
+const spa404Plugin: Plugin = {
+  name: 'wastebloom:spa-404-fallback',
+  closeBundle() {
+    const dist = path.resolve(__dirname, 'dist');
+    const index = path.join(dist, 'index.html');
+    if (fs.existsSync(index)) {
+      fs.copyFileSync(index, path.join(dist, '404.html'));
+    }
+  },
+};
 
 export default defineConfig(() => {
+  const isPreview = process.env.VITE_PREVIEW === 'true';
   return {
-    plugins: [react(), tailwindcss()],
+    base: process.env.VITE_BASE_PATH || '/',
+    plugins: [react(), tailwindcss(), ...(isPreview ? [previewSeoPlugin] : []), spa404Plugin],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
